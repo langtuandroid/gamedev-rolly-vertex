@@ -22,6 +22,16 @@ public class GameManager : MonoBehaviour
 	public GameObject secondChanceObject;
 	private bool secondChance = false;
 	
+	public float threshold;
+	public float speed;
+	public Platform tempPlatform;
+
+	[ColorUsageAttribute(true,true)]
+	public List<Color> colors;
+	
+	private Color previousColor;
+	public Color newColor;
+	
 	void Awake()
 	{
 		Instance = this;
@@ -231,14 +241,4 @@ public class GameManager : MonoBehaviour
 		secondChanceObject.SetActive(false);
 		secondChance = true;
 	}
-
-	public float threshold;
-	public float speed;
-	public Platform tempPlatform;
-
-	[ColorUsageAttribute(true,true)]
-	public List<Color> colors;
-	
-	private Color previousColor;
-	public Color newColor;
 }
