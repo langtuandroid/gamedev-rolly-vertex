@@ -1,7 +1,3 @@
-/*
- * http://wiki.unity3d.com/index.php?title=HSBColor
- */
-
 using UnityEngine;
  
 [System.Serializable]

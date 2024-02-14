@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LevelPass : MonoBehaviour
+public class LevelPassrv : MonoBehaviour
 {
-	public static LevelPass Instance;
+	public static LevelPassrv Instancerv;
 	public GameObject levelPassPrefab;
 	
-	GameObject levelPass;
+	private GameObject levelPass;
 	private LevelPassDestruction levelPassDestruction;
 	
-	void Awake()
+	private void Awake()
 	{
-		Instance = this;
+		Instancerv = this;
 	}
 	
-	void Start()
+	private void Start()
 	{
 		levelPass = Instantiate(levelPassPrefab);
 		

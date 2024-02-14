@@ -55,7 +55,7 @@ public class iOSHapticFeedback : MonoBehaviour {
         // Prevent having more than one instance in a scene
         if (_instance)
         { 
-            Debug.LogWarning("There is already an instance of iOSHapticFeedback.");
+            Debug.Log("There is already an instance of iOSHapticFeedback.");
             Destroy(gameObject);
             return;
         }
@@ -132,14 +132,14 @@ public class iOSHapticFeedback : MonoBehaviour {
     protected void InstantiateFeedbackGenerator(int id)
     {
         if (debug)
-            Debug.Log("Instantiate iOS feedback generator "+(iOSFeedbackType)id);
+            Debug.Log("Instantiate iOS feedback generator " + (iOSFeedbackType)id);
         _instantiateFeedbackGenerator(id);
     }
 
     protected void PrepareFeedbackGenerator(int id)
     {
         if (debug)
-            Debug.Log("Prepare iOS feedback generator "+(iOSFeedbackType)id);
+            Debug.Log("Prepare iOS feedback generator " + (iOSFeedbackType)id);
         _prepareFeedbackGenerator(id);
     }
 

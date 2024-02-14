@@ -160,7 +160,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.noname.digital.test
-    iPhone: com.noname.digital.test
+    iPhone: com.noname.digital.gamedev.rollyvertex
   buildNumber:
     Standalone: 0
     VisionOS: 0

@@ -1,28 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-	public float fixedX;
-	public float fixedY;
-	public float offsetZ;
-	public Transform target;
-
-	private Vector3 position;
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
+	[SerializeField]
+	private float _fixedXrv;
+	[SerializeField]
+	private float _fixedYrv;
+	[SerializeField]
+	private float _offsetZrv;
+	[SerializeField]
+	private Transform _targetrv;
 	
-	// Update is called once per frame
-	void Update () 
+	private Vector3 _positionrv;
+
+	public float FixedX
 	{
-		position = target.position;
-		position.x = fixedX;
-		position.y = fixedY;
-		position.z += offsetZ;
-		transform.position = position;
+		get => _fixedXrv;
+		set => _fixedXrv = value;
+	}
+
+	public float FixedY
+	{
+		get => _fixedYrv;
+		set => _fixedYrv = value;
+	}
+
+	public float OffsetZ
+	{
+		get => _offsetZrv;
+		set => _offsetZrv = value;
+	}
+
+	private void Update () 
+	{
+		_positionrv = _targetrv.position;
+		_positionrv.x = FixedX;
+		_positionrv.y = FixedY;
+		_positionrv.z += OffsetZ;
+		transform.position = _positionrv;
 	}
 }

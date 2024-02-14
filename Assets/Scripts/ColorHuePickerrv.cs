@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ColorHuePicker : MonoBehaviour
+public class ColorHuePickerrv : MonoBehaviour
 {
-	void SetColor(HSBColor color)
+	private void SetColor(HSBColor color)
 	{
 		SendMessage("SetDragPoint", new Vector3(color.h, 0, 0));
 	}	
 
-    void OnDrag(Vector3 point)
+    private void OnDrag(Vector3 point)
     {
 		transform.parent.BroadcastMessage("SetHue", point.x);
     }

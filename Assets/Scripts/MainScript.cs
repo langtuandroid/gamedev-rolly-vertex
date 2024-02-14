@@ -7,14 +7,18 @@ public class MyAwesomeScript : MonoBehaviour {
     public GameObject canvasToOpen;
     public GameObject[] objectsToClose;
 
-    public void OpenVideoMode() {
+    private Color defaultColor;
+    
+    public void OpenVideoMode()
+    {
         canvasToOpen.SetActive(true);
         for (int i = 0; i < objectsToClose.Length; i++) {
             objectsToClose[i].SetActive(false);
         }
     }
 
-    public void StartLikeSecondChance() {
+    public void StartLikeSecondChance()
+    {
         canvasToOpen.SetActive(false);
         for (int i = 0; i < objectsToClose.Length; i++) {
             objectsToClose[i].SetActive(true);
@@ -23,8 +27,9 @@ public class MyAwesomeScript : MonoBehaviour {
         GameManager.Instance.SecondChanceWithoutAd();
     }
 
-    private Color defaultColor;
-    private void Awake() {
+   
+    private void Awake() 
+    {
         defaultColor = cam.backgroundColor;
     }
 
@@ -37,27 +42,27 @@ public class MyAwesomeScript : MonoBehaviour {
     }
 
     public void Forward() {
-        camFollow.offsetZ += 1f;
+        camFollow.OffsetZ += 1f;
     }
 
     public void Back() {
-        camFollow.offsetZ -= 1f;
+        camFollow.OffsetZ -= 1f;
     }
 
     public void Left() {
-        camFollow.fixedX -= 1f;
+        camFollow.FixedX -= 1f;
     }
 
     public void Right() {
-        camFollow.fixedX += 1f;
+        camFollow.FixedX += 1f;
     }
 
     public void Up() {
-        camFollow.fixedY += 1f;
+        camFollow.FixedY += 1f;
     }
 
     public void Down() {
-        camFollow.fixedY -= 1f;
+        camFollow.FixedY -= 1f;
     }
 
     public void RotateRight() {

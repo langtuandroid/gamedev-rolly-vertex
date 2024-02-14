@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	
 	public TapToStartUI tapToStartUI;
 	public ScoreUI scoreUI;
-	public GameOverUI gameOverUI;
+	[FormerlySerializedAs("gameOverUI")] public GameOverUIrv gameOverUIrv;
 	public LevelTransitionUI levelTransitionUI;
 	public GameObject playerHolder;
 	public PlayerMovement playerMovement;
@@ -26,30 +26,30 @@ public class GameManager : MonoBehaviour
 	public float speed;
 	public Platform tempPlatform;
 
-	[ColorUsageAttribute(true,true)]
+	[ColorUsage(true,true)]
 	public List<Color> colors;
 	
 	private Color previousColor;
 	public Color newColor;
 	
-	void Awake()
+	private void Awake()
 	{
 		Instance = this;
 		Application.targetFrameRate = 60;
 	}
 
-	void Start()
+	private void Start()
 	{
 		tapToStartUI.gameObject.SetActive(true);
 		scoreUI.gameObject.SetActive(false);
-		gameOverUI.gameObject.SetActive(false);
+		gameOverUIrv.gameObject.SetActive(false);
 		levelTransitionUI.gameObject.SetActive(false);
         tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
 
 		ColorSelection(PlayerPrefs.GetInt("Color", 0));
     }
 
-	void Update()
+	private void Update()
 	{
 		if (PlayerStats.platformsHopped >= levelMilestone)
 		{
@@ -80,24 +80,16 @@ public class GameManager : MonoBehaviour
 	{
         tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-		// if (DeathCounter.counter > 3) 
-		// {
-		// 	//AdsManager.ShowInterstitial();
-		// }
-		// else
-		// {
-  //          
-  //       }
 	}
 	
 	public void EndGame()
 	{
 		scoreUI.gameObject.SetActive(false);
-		gameOverUI.gameObject.SetActive(true);
+		gameOverUIrv.gameObject.SetActive(true);
 		
 		if (PlayerStats.score > PlayerStats.best)
 		{
-			gameOverUI.ShowNewBestScore();
+			gameOverUIrv.ShowNewBestScore();
 			PlayerStats.best = PlayerStats.score;
 			PlayerPrefs.SetInt("best", PlayerStats.best);
 			PlayerPrefs.Save();
@@ -108,7 +100,7 @@ public class GameManager : MonoBehaviour
 		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Failure);
 		#endif
 
-		DeathCounter.counter++;
+		DeathCounterrv.counterrv++;
 
 		if (!secondChance) {
 			secondChanceObject.SetActive(true);
@@ -132,7 +124,7 @@ public class GameManager : MonoBehaviour
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
 		levelTransitionUI.gameObject.SetActive(true);
 		yield return new WaitForSeconds(0.22f);
-		LevelPass.Instance.DestroyLevelPass();
+		LevelPassrv.Instancerv.DestroyLevelPass();
 		#if (UNITY_ANDROID)
 		#else
 			iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.ImpactMedium);
@@ -169,7 +161,7 @@ public class GameManager : MonoBehaviour
 		tempPlatform.platformMaterial.SetColor("Color_EA86F2BE", newColor);
         tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
 
-        LevelPass.Instance.PlaceNewLevelPass();
+        LevelPassrv.Instancerv.PlaceNewLevelPass();
     }
 
 	private void ColorSelection(int previousIndex) {
@@ -184,9 +176,10 @@ public class GameManager : MonoBehaviour
 		
 	}
 
-	public void SecondChance() {
+	public void SecondChance() 
+	{
 		System.Action reward = () => {
-			gameOverUI.gameObject.SetActive(false);
+			gameOverUIrv.gameObject.SetActive(false);
 			scoreUI.gameObject.SetActive(true);
 
 			var platforms = PlatformPooler.Instance.activePlatforms;
@@ -215,15 +208,17 @@ public class GameManager : MonoBehaviour
 		//AdsManager.ShowRewarded(reward);
 	}
 
-	public void SecondChanceWithoutAd() {
-		gameOverUI.gameObject.SetActive(false);
+	public void SecondChanceWithoutAd() 
+	{
+		gameOverUIrv.gameObject.SetActive(false);
 		scoreUI.gameObject.SetActive(true);
 
 		var platforms = PlatformPooler.Instance.activePlatforms;
 		var min = 99999f;
 		var plat = platforms[0];
 
-		for (int i = 0; i < platforms.Count; i++) {
+		for (int i = 0; i < platforms.Count; i++) 
+		{
 			if (platforms[i].transform.position.z - playerHolder.transform.position.z < min) {
 				min = platforms[i].transform.position.z - playerHolder.transform.position.z;
 				plat = platforms[i];

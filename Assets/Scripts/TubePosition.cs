@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TubePosition : MonoBehaviour
 {
 	private GameObject playerHolder;
 	private bool destroyed;
-	void Start()
+	private void Start()
 	{
 		playerHolder = GameManager.Instance.GetPlayerHolder();
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	private void Update () 
 	{
 		if (destroyed)
 		{
@@ -27,7 +24,7 @@ public class TubePosition : MonoBehaviour
 		}
 	}
 
-	void OnEnable()
+	private void OnEnable()
 	{
 		destroyed = false;
 	}
