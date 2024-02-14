@@ -964,18 +964,18 @@ MonoBehaviour:
   levelMilestone: 30
   secondChanceObject: {fileID: 1883847852}
   threshold: 5
-  speed: 180
+  speed: 90
   tempPlatform: {fileID: 1840565213}
   colors:
-  - {r: 1.2006853, g: 2.270603, b: 2.270603, a: 1}
-  - {r: 2.270603, g: 2.270603, b: 0, a: 1}
-  - {r: 2.270603, g: 0, b: 0.42796704, a: 1}
-  - {r: 1.4027808, g: 0.07132784, b: 2.270603, a: 1}
-  - {r: 2.270603, g: 1.5097725, b: 0, a: 1}
-  - {r: 0, g: 2.270603, b: 0.14265569, a: 1}
-  - {r: 2.270603, g: 0.5943987, b: 1.783196, a: 1}
-  - {r: 0, g: 0.6538385, b: 2.270603, a: 1}
-  newColor: {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1.2006853, g: 2.270603, b: 2.270603, a: 0}
+  - {r: 2.270603, g: 2.270603, b: 0, a: 0}
+  - {r: 2.270603, g: 0, b: 0.42796704, a: 0}
+  - {r: 1.4027808, g: 0.07132784, b: 2.270603, a: 0}
+  - {r: 2.270603, g: 1.5097725, b: 0, a: 0}
+  - {r: 0, g: 2.270603, b: 0.14265569, a: 0}
+  - {r: 2.270603, g: 0.5943987, b: 1.783196, a: 0}
+  - {r: 0, g: 0.6538385, b: 2.270603, a: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &163674620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
+  - component: {fileID: 170076736}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1229,6 +1230,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &170076736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170076733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &214965496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,8 +2221,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114799223130249536, guid: b66983047c4d1fa4ca5e406a3bd17485,
         type: 3}
+      propertyPath: defaultColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799223130249536, guid: b66983047c4d1fa4ca5e406a3bd17485,
+        type: 3}
       propertyPath: perfectColor.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224417924108291108, guid: b66983047c4d1fa4ca5e406a3bd17485,
         type: 3}

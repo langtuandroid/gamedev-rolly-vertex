@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 		scoreUI.gameObject.SetActive(false);
 		gameOverUI.gameObject.SetActive(false);
 		levelTransitionUI.gameObject.SetActive(false);
-        tempPlatform.platformMaterial.SetFloat("Vector1_DCC11506", threshold);
+        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
 
 		ColorSelection(PlayerPrefs.GetInt("Color", 0));
     }
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 	
 	public void RestartGame()
 	{
-        tempPlatform.platformMaterial.SetFloat("Vector1_DCC11506", threshold);
+        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
 
 		if (DeathCounter.counter > 3) 
 		{
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 	IEnumerator ChangePlatformColor() 
 	{
 		var th = threshold;
-        tempPlatform.platformMaterial.SetFloat("Vector1_DCC11506", th);
+        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", th);
 
 		previousColor = newColor;
 		newColor = colors[Random.Range(0, colors.Count)];
@@ -160,14 +160,14 @@ public class GameManager : MonoBehaviour
         while (th < 300f) 
 		{
 			th += Time.deltaTime * speed;
-            tempPlatform.platformMaterial.SetFloat("Vector1_DCC11506", th);
+            tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", th);
 
 			yield return null;
         }
 
-		tempPlatform.platformMaterial.SetColor("Color_9641F80F", previousColor);
-		tempPlatform.platformMaterial.SetColor("Color_C155A686", newColor);
-        tempPlatform.platformMaterial.SetFloat("Vector1_DCC11506", threshold);
+		tempPlatform.platformMaterial.SetColor("Color_FD17D7D1", previousColor);
+		tempPlatform.platformMaterial.SetColor("Color_EA86F2BE", newColor);
+        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
 
         LevelPass.Instance.PlaceNewLevelPass();
     }
@@ -179,8 +179,8 @@ public class GameManager : MonoBehaviour
 			newColor = colors[Random.Range(0, colors.Count)];
 		}
 
-		tempPlatform.platformMaterial.SetColor("Color_9641F80F", previousColor);
-		tempPlatform.platformMaterial.SetColor("Color_C155A686", newColor);
+		tempPlatform.platformMaterial.SetColor("Color_FD17D7D1", previousColor);
+		tempPlatform.platformMaterial.SetColor("Color_EA86F2BE", newColor);
 		
 	}
 

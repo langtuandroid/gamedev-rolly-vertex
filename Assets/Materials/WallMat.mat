@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WallMat
-  m_Shader: {fileID: 4800000, guid: 800e0c7fef30a4e8d974a13a0d788a6f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 684df5133a165da4da93359bd63703dd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -90,8 +90,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_4D600DD6: 0
-    - Vector1_DCC11506: 5
+    - Vector1_4D600DD6: 241.02823
+    - Vector1_DCC11506: 300.72647
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -117,10 +117,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_9641F80F: {r: 2.270603, g: 1.5097725, b: 0, a: 1}
-    - Color_C155A686: {r: 2.270603, g: 0, b: 0.42796704, a: 1}
-    - Color_EA86F2BE: {r: 1.662745, g: 0.5568628, b: 0.5568628, a: 0}
-    - Color_FD17D7D1: {r: 1.662745, g: 0.5568628, b: 0.5568628, a: 0}
+    - Color_9641F80F: {r: 2.270603, g: 2.270603, b: 0, a: 0}
+    - Color_C155A686: {r: 2.270603, g: 1.5097725, b: 0, a: 0}
+    - Color_EA86F2BE: {r: 0, g: 2.270603, b: 0.14265569, a: 0}
+    - Color_FD17D7D1: {r: 1.2006853, g: 2.270603, b: 2.270603, a: 0}
     - _Color: {r: 0.2912513, g: 0.5990633, b: 0.8018868, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NewColor: {r: 0.16567281, g: 0.21423781, b: 0.6886792, a: 1}
