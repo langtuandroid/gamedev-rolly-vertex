@@ -79,15 +79,15 @@ public class GameManager : MonoBehaviour
 	public void RestartGame()
 	{
         tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
-
-		if (DeathCounter.counter > 3) 
-		{
-			//AdsManager.ShowInterstitial();
-		}
-		else
-		{
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		// if (DeathCounter.counter > 3) 
+		// {
+		// 	//AdsManager.ShowInterstitial();
+		// }
+		// else
+		// {
+  //          
+  //       }
 	}
 	
 	public void EndGame()
