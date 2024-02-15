@@ -30,7 +30,7 @@ namespace GamePlay
 		public void PlaceNewLevelPassrv()
 		{
 			Vector3 newPos = _levelPassrv.transform.position;
-			newPos.z += GameManager.Instance.levelMilestone * PlatformPoolerrv.Instancerv.PlatformGapDistancerv;
+			newPos.z += GameManager.Instance.LevelMilestonerv * PlatformPoolerrv.Instancerv.PlatformGapDistancerv;
 			_levelPassrv.transform.position = newPos;
 
 			var color = GameManager.Instance.newColor;

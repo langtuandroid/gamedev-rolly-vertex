@@ -53,7 +53,7 @@ namespace UI
 
 		private void UpdateProgressBar()
 		{
-			float progress = (float)PlayerStatsrv.PlatformsHoppedrv / GameManager.Instance.levelMilestone;
+			float progress = (float)PlayerStatsrv.PlatformsHoppedrv / GameManager.Instance.LevelMilestonerv;
 			DOTween.To(() => bar.fillAmount, x => bar.fillAmount = x, progress, 0.25f);
 		}
 

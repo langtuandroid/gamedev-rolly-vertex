@@ -174,7 +174,7 @@ namespace GamePlay
 			position.z += _platformGapDistancerv;
 
 			// This makes it so that first 4 platform in each level is in the middle
-			if (  (position.z / _platformGapDistancerv) % GameManager.Instance.levelMilestone  < 4f || position.z / _platformGapDistancerv % GameManager.Instance.levelMilestone > GameManager.Instance.levelMilestone - 1)
+			if (  (position.z / _platformGapDistancerv) % GameManager.Instance.LevelMilestonerv  < 4f || position.z / _platformGapDistancerv % GameManager.Instance.LevelMilestonerv > GameManager.Instance.LevelMilestonerv - 1)
 			{
 				rotation = Vector3.zero;
 				dullPlatform = true;

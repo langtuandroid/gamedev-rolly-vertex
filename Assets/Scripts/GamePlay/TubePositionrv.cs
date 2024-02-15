@@ -9,7 +9,7 @@ namespace GamePlay
 	
 		private void Start()
 		{
-			_playerHolderrv = GameManager.Instance.GetPlayerHolder();
+			_playerHolderrv = GameManager.Instance.GetPlayerHolderrv();
 		}
 	
 		private void Update () 

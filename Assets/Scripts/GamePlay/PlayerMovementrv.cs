@@ -146,7 +146,7 @@ namespace GamePlay
 			DOTween.KillAll();
 			Ballrv.DOLocalMoveY(-20f, 1f);
 			_doMovementrv = false;
-			GameManager.Instance.EndGame();
+			GameManager.Instance.EndGamerv();
 		
 		}
 	

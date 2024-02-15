@@ -16,7 +16,7 @@ namespace UI
 		private void Update()
 		{
 			_scorerv.text = PlayerStatsrv.Scorerv + "";
-			_gameOverrv.text = "%" + (int)( 100f * PlayerStatsrv.PlatformsHoppedrv / GameManager.Instance.levelMilestone) + " COMPLETED";
+			_gameOverrv.text = "%" + (int)( 100f * PlayerStatsrv.PlatformsHoppedrv / GameManager.Instance.LevelMilestonerv) + " COMPLETED";
 		}
 
 		private void Start()
@@ -32,7 +32,7 @@ namespace UI
 
 		public void Restartrv()
 		{
-			GameManager.Instance.RestartGame();
+			GameManager.Instance.RestartGamerv();
 		}
 	}
 }

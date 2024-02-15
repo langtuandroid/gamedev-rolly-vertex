@@ -25,7 +25,7 @@ namespace UI
 
 		public void StartGame()
 		{
-			GameManager.Instance.StartGame();
+			GameManager.Instance.StartGamerv();
 		}
 	}
 }

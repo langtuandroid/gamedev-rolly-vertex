@@ -93,7 +93,7 @@ namespace UI
                 objectsToClose[i].SetActive(true);
             }
 
-            GameManager.Instance.SecondChanceWithoutAd();
+            GameManager.Instance.SecondChanceWithoutAdrv();
         }
         
         public void ToggleColor() 

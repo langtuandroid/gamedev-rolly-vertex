@@ -1091,17 +1091,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapToStartUIrv: {fileID: 628198834}
-  scoreUI: {fileID: 1415123050}
+  scoreUIrv: {fileID: 1415123050}
   gameOverUIrv: {fileID: 1983750353}
   levelTransitionUIrv: {fileID: 1302302331}
-  playerMovement: {fileID: 86939622}
-  platformHolder: {fileID: 1696376222}
-  swipeToPlay: {fileID: 535172462}
-  levelMilestone: 30
-  secondChanceObject: {fileID: 1883847852}
-  threshold: 5
-  speed: 180
-  tempPlatformrv: {fileID: 2020838362}
+  playerMovementrv: {fileID: 86939622}
+  _platformHolderrv: {fileID: 1696376222}
+  _swipeToPlayrv: {fileID: 535172462}
+  _levelMilestonerv: 30
+  _secondChanceObjectrv: {fileID: 1883847852}
+  _secondChancerv: 0
+  _thresholdrv: 5
+  _speedrv: 180
+  _tempPlatformrvrv: {fileID: 2020838362}
   colors:
   - {r: 0, g: 0.6538385, b: 2.270603, a: 0}
   - {r: 1.2006853, g: 2.270603, b: 2.270603, a: 0}
@@ -13938,7 +13939,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 163674619}
         m_TargetAssemblyTypeName: 
-        m_MethodName: SecondChance
+        m_MethodName: SecondChancerv
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

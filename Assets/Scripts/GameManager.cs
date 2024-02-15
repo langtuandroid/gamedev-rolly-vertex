@@ -6,36 +6,54 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using GamePlay;
 using UI;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+	private const string _thresholdId = "Vector1_4D600DD6";
+	private const string _previousColorID = "Color_FD17D7D1";
+	private const string _newColorId = "Color_EA86F2BE";
+	
 	public static GameManager Instance;
-	[FormerlySerializedAs("tapToStartUI")] public TapToStartUIrv tapToStartUIrv;
-	public ScoreUI scoreUI;
-	[FormerlySerializedAs("gameOverUI")] public GameOverUIrv gameOverUIrv;
-	[FormerlySerializedAs("levelTransitionUI")] public LevelTransitionUIrv levelTransitionUIrv;
-	
-	[FormerlySerializedAs("playerMovement")] public PlayerMovementrv playerMovementrv;
-	public GameObject platformHolder;
-
-	public GameObject swipeToPlay;
-
-	public int levelMilestone;
-	public GameObject secondChanceObject;
-	private bool secondChance = false;
-	
-	public float threshold;
-	public float speed;
-	[FormerlySerializedAs("tempPlatform")] public Platformrv tempPlatformrv;
+	[SerializeField]
+	private TapToStartUIrv tapToStartUIrv;
+	[SerializeField]
+	private ScoreUI scoreUIrv;
+	[SerializeField]
+	private GameOverUIrv gameOverUIrv;
+	[SerializeField]
+	private LevelTransitionUIrv levelTransitionUIrv;
+	[SerializeField]
+	private PlayerMovementrv playerMovementrv;
+	[SerializeField]
+	private GameObject _platformHolderrv;
+	[SerializeField]
+	private GameObject _swipeToPlayrv;
+	[SerializeField]
+	private int _levelMilestonerv;
+	[SerializeField]
+	private GameObject _secondChanceObjectrv;
+	[SerializeField]
+	private bool _secondChancerv = false;
+	[SerializeField]
+	private float _thresholdrv;
+	[SerializeField]
+	private float _speedrv;
+	[SerializeField]
+	private Platformrv _tempPlatformrvrv;
 
 	[ColorUsage(true,true)]
 	public List<Color> colors;
-	
 	private Color previousColor;
 	public Color newColor;
-	
+
+	public int LevelMilestonerv
+	{
+		get => _levelMilestonerv;
+		set => _levelMilestonerv = value;
+	}
+
+
 	private void Awake()
 	{
 		Instance = this;
@@ -45,51 +63,51 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		tapToStartUIrv.gameObject.SetActive(true);
-		scoreUI.gameObject.SetActive(false);
+		scoreUIrv.gameObject.SetActive(false);
 		gameOverUIrv.gameObject.SetActive(false);
 		levelTransitionUIrv.gameObject.SetActive(false);
-        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
+        _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, _thresholdrv);
 
-		ColorSelection(PlayerPrefs.GetInt("Color", 0));
+		ColorSelectionrv(PlayerPrefs.GetInt("Color", 0));
     }
 	
 
 	private void Update()
 	{
-		if (PlayerStatsrv.PlatformsHoppedrv >= levelMilestone)
+		if (PlayerStatsrv.PlatformsHoppedrv >= LevelMilestonerv)
 		{
-			NextLevel();
+			NextLevelrv();
 		}
 
-		if (swipeToPlay.activeInHierarchy) {
+		if (_swipeToPlayrv.activeInHierarchy) {
 			if (Input.GetMouseButtonDown(0)) {
-				swipeToPlay.SetActive(false);
+				_swipeToPlayrv.SetActive(false);
 				playerMovementrv.StartMovementrv();
 			}
 		}
 	}
 	
-	public GameObject GetPlayerHolder()
+	public GameObject GetPlayerHolderrv()
 	{
 		return playerMovementrv.gameObject;
 	}
 
-	public void StartGame()
+	public void StartGamerv()
 	{
-		scoreUI.gameObject.SetActive(true);
+		scoreUIrv.gameObject.SetActive(true);
 		tapToStartUIrv.gameObject.SetActive(false);
 		playerMovementrv.StartMovementrv();
 	}
 	
-	public void RestartGame()
+	public void RestartGamerv()
 	{
-        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
+        _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, _thresholdrv);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 	
-	public void EndGame()
+	public void EndGamerv()
 	{
-		scoreUI.gameObject.SetActive(false);
+		scoreUIrv.gameObject.SetActive(false);
 		gameOverUIrv.gameObject.SetActive(true);
 		
 		if (PlayerStatsrv.Scorerv > PlayerStatsrv.Bestrv)
@@ -112,12 +130,12 @@ public class GameManager : MonoBehaviour
 
 		DeathCounterrv.counterrv++;
 
-		if (!secondChance) {
-			secondChanceObject.SetActive(true);
+		if (!_secondChancerv) {
+			_secondChanceObjectrv.SetActive(true);
 		}
     }
 
-	public void NextLevel()
+	private void NextLevelrv()
 	{
 		PlayerStatsrv.IncrementLevelrv();
         #if (UNITY_ANDROID)
@@ -127,10 +145,10 @@ public class GameManager : MonoBehaviour
         iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Success);
         #endif
 
-		StartCoroutine(LevelTransition());
+		StartCoroutine(LevelTransitionrv());
 	}
 
-	IEnumerator LevelTransition()
+	private IEnumerator LevelTransitionrv()
 	{
 		Time.timeScale = 0.25f;
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -152,10 +170,10 @@ public class GameManager : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 	}
 
-	IEnumerator ChangePlatformColor() 
+	private IEnumerator ChangePlatformColor() 
 	{
-		var th = threshold;
-        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", th);
+		var th = _thresholdrv;
+        _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, th);
 
 		previousColor = newColor;
 		newColor = colors[Random.Range(0, colors.Count)];
@@ -166,36 +184,37 @@ public class GameManager : MonoBehaviour
 
         while (th < 300f) 
 		{
-			th += Time.deltaTime * speed;
-            tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", th);
+			th += Time.deltaTime * _speedrv;
+            _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, th);
 
 			yield return null;
         }
 
-		tempPlatformrv.PlatformMaterialrv.SetColor("Color_FD17D7D1", previousColor);
-		tempPlatformrv.PlatformMaterialrv.SetColor("Color_EA86F2BE", newColor);
-        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
+		_tempPlatformrvrv.PlatformMaterialrv.SetColor(_previousColorID, previousColor);
+		_tempPlatformrvrv.PlatformMaterialrv.SetColor(_newColorId, newColor);
+        _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, _thresholdrv);
 
         LevelPassrv.Instancerv.PlaceNewLevelPassrv();
     }
 
-	private void ColorSelection(int previousIndex) {
+	private void ColorSelectionrv(int previousIndex)
+	{
 		previousColor = colors[previousIndex];
 		newColor = colors[Random.Range(0, colors.Count)];
 		while (newColor == previousColor) {
 			newColor = colors[Random.Range(0, colors.Count)];
 		}
 
-		tempPlatformrv.PlatformMaterialrv.SetColor("Color_FD17D7D1", previousColor);
-		tempPlatformrv.PlatformMaterialrv.SetColor("Color_EA86F2BE", newColor);
+		_tempPlatformrvrv.PlatformMaterialrv.SetColor(_previousColorID, previousColor);
+		_tempPlatformrvrv.PlatformMaterialrv.SetColor(_newColorId, newColor);
 		
 	}
 
-	public void SecondChance() 
+	public void SecondChancerv() 
 	{
 		System.Action reward = () => {
 			gameOverUIrv.gameObject.SetActive(false);
-			scoreUI.gameObject.SetActive(true);
+			scoreUIrv.gameObject.SetActive(true);
 
 			var platforms = PlatformPoolerrv.Instancerv.ActivePlatformsrv;
 			var min = 99999f;
@@ -215,16 +234,16 @@ public class GameManager : MonoBehaviour
 
 			playerMovementrv.Ballrv.DOKill();
 
-			swipeToPlay.SetActive(true);
-			secondChanceObject.SetActive(false);
-			secondChance = true;
+			_swipeToPlayrv.SetActive(true);
+			_secondChanceObjectrv.SetActive(false);
+			_secondChancerv = true;
 		};
 	}
 
-	public void SecondChanceWithoutAd() 
+	public void SecondChanceWithoutAdrv() 
 	{
 		gameOverUIrv.gameObject.SetActive(false);
-		scoreUI.gameObject.SetActive(true);
+		scoreUIrv.gameObject.SetActive(true);
 
 		var platforms = PlatformPoolerrv.Instancerv.ActivePlatformsrv;
 		var min = 99999f;
@@ -245,8 +264,8 @@ public class GameManager : MonoBehaviour
 
 		playerMovementrv.Ballrv.DOKill();
 
-		swipeToPlay.SetActive(true);
-		secondChanceObject.SetActive(false);
-		secondChance = true;
+		_swipeToPlayrv.SetActive(true);
+		_secondChanceObjectrv.SetActive(false);
+		_secondChancerv = true;
 	}
 }

@@ -33,7 +33,7 @@ namespace GamePlay
 			Levelrv = PlayerPrefs.GetInt("level");
 
 			LevelHardnessMultiplierrv = (int)Mathf.Pow(Mathf.Log(Levelrv), 2);
-			GameManager.Instance.levelMilestone = 30 + LevelHardnessMultiplierrv / 2;
+			GameManager.Instance.LevelMilestonerv = 30 + LevelHardnessMultiplierrv / 2;
 		}
 
 		public static void IncrementScorerv()
@@ -60,7 +60,7 @@ namespace GamePlay
 			PlayerPrefs.Save();
 		
 			LevelHardnessMultiplierrv = (int)Mathf.Pow(Mathf.Log(Levelrv), 2);
-			GameManager.Instance.levelMilestone = 30 + LevelHardnessMultiplierrv / 2;
+			GameManager.Instance.LevelMilestonerv = 30 + LevelHardnessMultiplierrv / 2;
 		}
 
 		public static void IncrementPlatformsHoppedrv()
