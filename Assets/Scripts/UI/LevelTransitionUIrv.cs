@@ -1,16 +1,17 @@
-﻿using TMPro;
+﻿using GamePlay;
+using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-	public class LevelTransitionUI : MonoBehaviour
+	public class LevelTransitionUIrv : MonoBehaviour
 	{
 		[SerializeField]
 		private  TextMeshProUGUI _levelTransitionTextrv;
 
-		void Update()
+		private void OnEnable()
 		{
-			_levelTransitionTextrv.text = "Vortex " + PlayerStats.level;
+			_levelTransitionTextrv.text = "Vortex " + PlayerStatsrv.Levelrv;
 		}
 	}
 }

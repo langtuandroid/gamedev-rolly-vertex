@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using GamePlay;
+using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-	public class TapToStartUI : MonoBehaviour
+	public class TapToStartUIrv : MonoBehaviour
 	{
 		public TextMeshProUGUI best;
 		public TextMeshProUGUI level;
@@ -14,11 +15,14 @@ namespace UI
 			{
 				StartGame();
 			}
-
-			level.text = "Level: " + PlayerStats.level;
-			best.text = "HIGHSCORE: " + PlayerStats.best + "";
 		}
-	
+
+		private void Start()
+		{
+			level.text = "Level: " + PlayerStatsrv.Levelrv;
+			best.text = "HIGHSCORE: " + PlayerStatsrv.Bestrv + "";
+		}
+
 		public void StartGame()
 		{
 			GameManager.Instance.StartGame();

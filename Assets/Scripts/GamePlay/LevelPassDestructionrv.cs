@@ -1,50 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LevelPassDestruction : MonoBehaviour
+namespace GamePlay
 {
-	public GameObject regular;
-	public GameObject destroyed;
-
-	public Vector3[] originalPositions;
-
-	void Awake()
+	public class LevelPassDestructionrv : MonoBehaviour
 	{
-		originalPositions = new Vector3[destroyed.transform.childCount];
-		
-		for (int i = 0; i < destroyed.transform.childCount; i++)
+		[SerializeField]
+		private GameObject _regularrv;
+		[SerializeField]
+		private GameObject _destroyedrv;
+
+		private Vector3[] _originalPositionsrv;
+
+		private void Awake()
 		{
-			originalPositions[i] = destroyed.transform.GetChild(i).localPosition;
+			_originalPositionsrv = new Vector3[_destroyedrv.transform.childCount];
+		
+			for (int i = 0; i < _destroyedrv.transform.childCount; i++)
+			{
+				_originalPositionsrv[i] = _destroyedrv.transform.GetChild(i).localPosition;
+			}
 		}
-	}
 	
-	void Start()
-	{
-		RestoreLevelPass();
-	}
+		private void Start()
+		{
+			RestoreLevelPass();
+		}
 	
-	public void DestroyLevelPass()
-	{
-		regular.SetActive(false);
-		destroyed.SetActive(true);
-		
-		for (int i = 0; i < destroyed.transform.childCount; i++)
+		public void DestroyLevelPass()
 		{
-			destroyed.transform.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(2000f,destroyed.transform.position,3f);
-		}
+			_regularrv.SetActive(false);
+			_destroyedrv.SetActive(true);
 		
-	}
+			for (int i = 0; i < _destroyedrv.transform.childCount; i++)
+			{
+				_destroyedrv.transform.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(2000f,_destroyedrv.transform.position,3f);
+			}
+		
+		}
 
-	public void RestoreLevelPass()
-	{	
-		for (int i = 0; i < destroyed.transform.childCount; i++)
-		{
-			destroyed.transform.GetChild(i).localPosition = originalPositions[i];
-			destroyed.transform.GetChild(i).GetComponent<Rigidbody>().velocity = Vector3.zero;
-		}
+		public void RestoreLevelPass()
+		{	
+			for (int i = 0; i < _destroyedrv.transform.childCount; i++)
+			{
+				_destroyedrv.transform.GetChild(i).localPosition = _originalPositionsrv[i];
+				_destroyedrv.transform.GetChild(i).GetComponent<Rigidbody>().velocity = Vector3.zero;
+			}
 		
-		regular.SetActive(true);
-		destroyed.SetActive(false);
+			_regularrv.SetActive(true);
+			_destroyedrv.SetActive(false);
+		}
 	}
 }

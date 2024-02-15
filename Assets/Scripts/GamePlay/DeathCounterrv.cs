@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class DeathCounterrv : MonoBehaviour 
+namespace GamePlay
 {
-    public static int counterrv = 0;
-
-    private static DeathCounterrv Instancerv;
-
-    private void Awake()
+    public class DeathCounterrv : MonoBehaviour 
     {
-        if (Instancerv) Destroy(gameObject);
-        else Instancerv = this;
+        public static int counterrv = 0;
 
-        DontDestroyOnLoad(gameObject);
+        private static DeathCounterrv Instancerv;
+
+        private void Awake()
+        {
+            if (Instancerv) Destroy(gameObject);
+            else Instancerv = this;
+
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }

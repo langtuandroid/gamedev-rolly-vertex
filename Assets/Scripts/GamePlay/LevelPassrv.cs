@@ -1,51 +1,55 @@
 ﻿using UnityEngine;
 
-public class LevelPassrv : MonoBehaviour
+namespace GamePlay
 {
-	public static LevelPassrv Instancerv;
-	public GameObject levelPassPrefab;
-	
-	private GameObject levelPass;
-	private LevelPassDestruction levelPassDestruction;
-	
-	private void Awake()
+	public class LevelPassrv : MonoBehaviour
 	{
-		Instancerv = this;
-	}
-	
-	private void Start()
-	{
-		levelPass = Instantiate(levelPassPrefab);
+		public static LevelPassrv Instancerv;
 		
-		levelPass.transform.position = Vector3.forward * 12.5f;
-
-		levelPassDestruction = levelPass.GetComponent<LevelPassDestruction>();
-		
-		PlaceNewLevelPass();
-	}
+		[SerializeField]
+		private GameObject _levelPassPrefabrv;
+		private GameObject _levelPassrv;
+		private LevelPassDestructionrv _levelPassDestructionrv;
 	
-	public void PlaceNewLevelPass()
-	{
-		Vector3 newPos = levelPass.transform.position;
-		newPos.z += GameManager.Instance.levelMilestone * PlatformPooler.Instance.platformGapDistance;
-		levelPass.transform.position = newPos;
+		private void Awake()
+		{
+			Instancerv = this;
+		}
+	
+		private void Start()
+		{
+			_levelPassrv = Instantiate(_levelPassPrefabrv);
+		
+			_levelPassrv.transform.position = Vector3.forward * 12.5f;
 
-		var color = GameManager.Instance.newColor;
-		color.a = 0.5f;
+			_levelPassDestructionrv = _levelPassrv.GetComponent<LevelPassDestructionrv>();
+		
+			PlaceNewLevelPassrv();
+		}
+	
+		public void PlaceNewLevelPassrv()
+		{
+			Vector3 newPos = _levelPassrv.transform.position;
+			newPos.z += GameManager.Instance.levelMilestone * PlatformPoolerrv.Instancerv.PlatformGapDistancerv;
+			_levelPassrv.transform.position = newPos;
 
-		levelPass.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = color;
+			var color = GameManager.Instance.newColor;
+			color.a = 0.5f;
 
-		var renderers = levelPass.GetComponentsInChildren<MeshRenderer>();
+			_levelPassrv.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = color;
 
-		for (int i = 0; i < renderers.Length; i++) {
-			renderers[i].material.color = color;
+			var renderers = _levelPassrv.GetComponentsInChildren<MeshRenderer>();
+
+			for (int i = 0; i < renderers.Length; i++) {
+				renderers[i].material.color = color;
+			}
+
+			_levelPassDestructionrv.RestoreLevelPass();
 		}
 
-        levelPassDestruction.RestoreLevelPass();
-	}
-
-	public void DestroyLevelPass()
-	{
-		levelPassDestruction.DestroyLevelPass();
+		public void DestroyLevelPassrv()
+		{
+			_levelPassDestructionrv.DestroyLevelPass();
+		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GamePlay
 {
-	public class Platform : MonoBehaviour
+	public class Platformrv : MonoBehaviour
 	{
 		private bool _canMoverv;
 		private bool _hasPerfectrv;
@@ -80,7 +80,7 @@ namespace GamePlay
 			_canMoverv = true;
 
 			Vector3 newRotation = transform.rotation.eulerAngles;
-			newRotation.z += 30f + PlayerStats.levelHardnessMultiplier / 2f;
+			newRotation.z += 30f + PlayerStatsrv.LevelHardnessMultiplierrv / 2f;
 			transform.DORotate(newRotation, 1f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.InOutSine);
 		}
 
@@ -102,27 +102,27 @@ namespace GamePlay
 		{
 			int randNumber = Random.Range(0, _platformSizesrv.Length);
 		
-			if (PlayerStats.level >= 100f)
+			if (PlayerStatsrv.Levelrv >= 100f)
 			{
 				randNumber = Random.Range(3, _platformSizesrv.Length);
 			}
 		
-			if (PlayerStats.level < 50f)
+			if (PlayerStatsrv.Levelrv < 50f)
 			{
 				randNumber = Random.Range(3,4);
 			}
 		
-			if (PlayerStats.level < 20f)
+			if (PlayerStatsrv.Levelrv < 20f)
 			{
 				randNumber = Random.Range(2,3);
 			}
-			if (PlayerStats.level < 10f)
+			if (PlayerStatsrv.Levelrv < 10f)
 			{
 				randNumber = Random.Range(1,2);
 		
 			}
 		
-			if (PlayerStats.level < 5f)
+			if (PlayerStatsrv.Levelrv < 5f)
 			{
 				randNumber = Random.Range(0, 1);
 			}

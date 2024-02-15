@@ -1,34 +1,38 @@
-﻿using TMPro;
+﻿using GamePlay;
+using TMPro;
 using UnityEngine;
 
-public class GameOverUIrv : MonoBehaviour
+namespace UI
 {
-	[SerializeField]
-	private TextMeshProUGUI _gameOverrv;
-	[SerializeField]
-	private TextMeshProUGUI _scorerv;
-	[SerializeField]
-	private TextMeshProUGUI _bestrv;
-
-	private void Update()
+	public class GameOverUIrv : MonoBehaviour
 	{
-		_scorerv.text = PlayerStats.score + "";
-		_gameOverrv.text = "%" + (int)( 100f * PlayerStats.platformsHopped / GameManager.Instance.levelMilestone) + " COMPLETED";
-	}
+		[SerializeField]
+		private TextMeshProUGUI _gameOverrv;
+		[SerializeField]
+		private TextMeshProUGUI _scorerv;
+		[SerializeField]
+		private TextMeshProUGUI _bestrv;
 
-	private void Start()
-	{
-		_bestrv.gameObject.SetActive(false);
-	}
+		private void Update()
+		{
+			_scorerv.text = PlayerStatsrv.Scorerv + "";
+			_gameOverrv.text = "%" + (int)( 100f * PlayerStatsrv.PlatformsHoppedrv / GameManager.Instance.levelMilestone) + " COMPLETED";
+		}
+
+		private void Start()
+		{
+			_bestrv.gameObject.SetActive(false);
+		}
 	
-	public void ShowNewBestScorerv()
-	{
-		_bestrv.text = "New Best: " + PlayerStats.score;
-		_bestrv.gameObject.SetActive(true);
-	}
+		public void ShowNewBestScorerv()
+		{
+			_bestrv.text = "New Best: " + PlayerStatsrv.Scorerv;
+			_bestrv.gameObject.SetActive(true);
+		}
 
-	public void Restartrv()
-	{
-		GameManager.Instance.RestartGame();
+		public void Restartrv()
+		{
+			GameManager.Instance.RestartGame();
+		}
 	}
 }

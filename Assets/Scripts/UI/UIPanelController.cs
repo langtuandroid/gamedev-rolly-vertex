@@ -1,5 +1,6 @@
 using Audio;
 using DG.Tweening;
+using GamePlay;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ namespace UI
         [SerializeField]
         private Camera _camerarv;
         [SerializeField]
-        private CameraFollow _camFollowrv;
+        private CameraFollowrv _camFollowrv;
         [SerializeField]
         private GameObject _canvasToOpenrv;
         public GameObject[] objectsToClose;

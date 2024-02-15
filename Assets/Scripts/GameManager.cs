@@ -4,18 +4,20 @@ using Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using GamePlay;
+using UI;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
-	public TapToStartUI tapToStartUI;
+	[FormerlySerializedAs("tapToStartUI")] public TapToStartUIrv tapToStartUIrv;
 	public ScoreUI scoreUI;
 	[FormerlySerializedAs("gameOverUI")] public GameOverUIrv gameOverUIrv;
-	public LevelTransitionUI levelTransitionUI;
+	[FormerlySerializedAs("levelTransitionUI")] public LevelTransitionUIrv levelTransitionUIrv;
 	
-	public PlayerMovement playerMovement;
+	[FormerlySerializedAs("playerMovement")] public PlayerMovementrv playerMovementrv;
 	public GameObject platformHolder;
 
 	public GameObject swipeToPlay;
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 	
 	public float threshold;
 	public float speed;
-	public Platform tempPlatform;
+	[FormerlySerializedAs("tempPlatform")] public Platformrv tempPlatformrv;
 
 	[ColorUsage(true,true)]
 	public List<Color> colors;
@@ -42,11 +44,11 @@ public class GameManager : MonoBehaviour
 	
 	private void Start()
 	{
-		tapToStartUI.gameObject.SetActive(true);
+		tapToStartUIrv.gameObject.SetActive(true);
 		scoreUI.gameObject.SetActive(false);
 		gameOverUIrv.gameObject.SetActive(false);
-		levelTransitionUI.gameObject.SetActive(false);
-        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
+		levelTransitionUIrv.gameObject.SetActive(false);
+        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
 
 		ColorSelection(PlayerPrefs.GetInt("Color", 0));
     }
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (PlayerStats.platformsHopped >= levelMilestone)
+		if (PlayerStatsrv.PlatformsHoppedrv >= levelMilestone)
 		{
 			NextLevel();
 		}
@@ -62,26 +64,26 @@ public class GameManager : MonoBehaviour
 		if (swipeToPlay.activeInHierarchy) {
 			if (Input.GetMouseButtonDown(0)) {
 				swipeToPlay.SetActive(false);
-				playerMovement.StartMovement();
+				playerMovementrv.StartMovementrv();
 			}
 		}
 	}
 	
 	public GameObject GetPlayerHolder()
 	{
-		return playerMovement.gameObject;
+		return playerMovementrv.gameObject;
 	}
 
 	public void StartGame()
 	{
 		scoreUI.gameObject.SetActive(true);
-		tapToStartUI.gameObject.SetActive(false);
-		playerMovement.StartMovement();
+		tapToStartUIrv.gameObject.SetActive(false);
+		playerMovementrv.StartMovementrv();
 	}
 	
 	public void RestartGame()
 	{
-        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
+        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 	
@@ -90,11 +92,11 @@ public class GameManager : MonoBehaviour
 		scoreUI.gameObject.SetActive(false);
 		gameOverUIrv.gameObject.SetActive(true);
 		
-		if (PlayerStats.score > PlayerStats.best)
+		if (PlayerStatsrv.Scorerv > PlayerStatsrv.Bestrv)
 		{
-			gameOverUIrv.ShowNewBestScore();
-			PlayerStats.best = PlayerStats.score;
-			PlayerPrefs.SetInt("best", PlayerStats.best);
+			gameOverUIrv.ShowNewBestScorerv();
+			PlayerStatsrv.Bestrv = PlayerStatsrv.Scorerv;
+			PlayerPrefs.SetInt("best", PlayerStatsrv.Bestrv);
 			PlayerPrefs.Save();
 			 
 		}
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
       }
 		#else
 		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Failure);
-#endif
+        #endif
 
 		DeathCounterrv.counterrv++;
 
@@ -117,13 +119,13 @@ public class GameManager : MonoBehaviour
 
 	public void NextLevel()
 	{
-		PlayerStats.IncrementLevel();
-#if (UNITY_ANDROID)
-if (AudioManager.Instance.IsVirbration)
-{Vibration.VibratePop();}
-#else
-		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Success);
-#endif
+		PlayerStatsrv.IncrementLevelrv();
+        #if (UNITY_ANDROID)
+        if (AudioManager.Instance.IsVirbration)
+        {Vibration.VibratePop();}
+        #else
+        iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Success);
+        #endif
 
 		StartCoroutine(LevelTransition());
 	}
@@ -132,10 +134,10 @@ if (AudioManager.Instance.IsVirbration)
 	{
 		Time.timeScale = 0.25f;
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
-		levelTransitionUI.gameObject.SetActive(true);
+		levelTransitionUIrv.gameObject.SetActive(true);
 		yield return new WaitForSeconds(0.22f);
 		AudioManager.Instance.PlaySFXOneShot(3);
-		LevelPassrv.Instancerv.DestroyLevelPass();
+		LevelPassrv.Instancerv.DestroyLevelPassrv();
 		#if (UNITY_ANDROID)
 		if (AudioManager.Instance.IsVirbration)
          {Vibration.VibratePop();}
@@ -144,7 +146,7 @@ if (AudioManager.Instance.IsVirbration)
 		#endif
         StartCoroutine(ChangePlatformColor());
 		yield return new WaitForSeconds(0.25f);
-		levelTransitionUI.gameObject.SetActive(false);
+		levelTransitionUIrv.gameObject.SetActive(false);
 		Time.timeScale = 1f;
 		Time.fixedDeltaTime = 0.02f;
 		yield return new WaitForSeconds(1f);
@@ -153,7 +155,7 @@ if (AudioManager.Instance.IsVirbration)
 	IEnumerator ChangePlatformColor() 
 	{
 		var th = threshold;
-        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", th);
+        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", th);
 
 		previousColor = newColor;
 		newColor = colors[Random.Range(0, colors.Count)];
@@ -165,16 +167,16 @@ if (AudioManager.Instance.IsVirbration)
         while (th < 300f) 
 		{
 			th += Time.deltaTime * speed;
-            tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", th);
+            tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", th);
 
 			yield return null;
         }
 
-		tempPlatform.platformMaterial.SetColor("Color_FD17D7D1", previousColor);
-		tempPlatform.platformMaterial.SetColor("Color_EA86F2BE", newColor);
-        tempPlatform.platformMaterial.SetFloat("Vector1_4D600DD6", threshold);
+		tempPlatformrv.PlatformMaterialrv.SetColor("Color_FD17D7D1", previousColor);
+		tempPlatformrv.PlatformMaterialrv.SetColor("Color_EA86F2BE", newColor);
+        tempPlatformrv.PlatformMaterialrv.SetFloat("Vector1_4D600DD6", threshold);
 
-        LevelPassrv.Instancerv.PlaceNewLevelPass();
+        LevelPassrv.Instancerv.PlaceNewLevelPassrv();
     }
 
 	private void ColorSelection(int previousIndex) {
@@ -184,8 +186,8 @@ if (AudioManager.Instance.IsVirbration)
 			newColor = colors[Random.Range(0, colors.Count)];
 		}
 
-		tempPlatform.platformMaterial.SetColor("Color_FD17D7D1", previousColor);
-		tempPlatform.platformMaterial.SetColor("Color_EA86F2BE", newColor);
+		tempPlatformrv.PlatformMaterialrv.SetColor("Color_FD17D7D1", previousColor);
+		tempPlatformrv.PlatformMaterialrv.SetColor("Color_EA86F2BE", newColor);
 		
 	}
 
@@ -195,23 +197,23 @@ if (AudioManager.Instance.IsVirbration)
 			gameOverUIrv.gameObject.SetActive(false);
 			scoreUI.gameObject.SetActive(true);
 
-			var platforms = PlatformPooler.Instance.activePlatforms;
+			var platforms = PlatformPoolerrv.Instancerv.ActivePlatformsrv;
 			var min = 99999f;
 			var plat = platforms[0];
 
 			for (int i = 0; i < platforms.Count; i++) {
-				if (platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z < min) {
-					min = platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z;
+				if (platforms[i].transform.position.z - playerMovementrv.gameObject.transform.position.z < min) {
+					min = platforms[i].transform.position.z - playerMovementrv.gameObject.transform.position.z;
 					plat = platforms[i];
 				}
 			}
 
 			plat.transform.rotation = Quaternion.identity;
-			playerMovement.gameObject.transform.rotation = Quaternion.identity;
-			playerMovement.gameObject.transform.position = plat.transform.position;
-			playerMovement.ball.transform.localPosition = playerMovement.jumpBottom.localPosition;
+			playerMovementrv.gameObject.transform.rotation = Quaternion.identity;
+			playerMovementrv.gameObject.transform.position = plat.transform.position;
+			playerMovementrv.Ballrv.transform.localPosition = playerMovementrv.JumpBottomrv.localPosition;
 
-			playerMovement.ball.DOKill();
+			playerMovementrv.Ballrv.DOKill();
 
 			swipeToPlay.SetActive(true);
 			secondChanceObject.SetActive(false);
@@ -224,24 +226,24 @@ if (AudioManager.Instance.IsVirbration)
 		gameOverUIrv.gameObject.SetActive(false);
 		scoreUI.gameObject.SetActive(true);
 
-		var platforms = PlatformPooler.Instance.activePlatforms;
+		var platforms = PlatformPoolerrv.Instancerv.ActivePlatformsrv;
 		var min = 99999f;
 		var plat = platforms[0];
 
 		for (int i = 0; i < platforms.Count; i++) 
 		{
-			if (platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z < min) {
-				min = platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z;
+			if (platforms[i].transform.position.z - playerMovementrv.gameObject.transform.position.z < min) {
+				min = platforms[i].transform.position.z - playerMovementrv.gameObject.transform.position.z;
 				plat = platforms[i];
 			}
 		}
 
 		plat.transform.rotation = Quaternion.identity;
-		playerMovement.gameObject.transform.rotation = Quaternion.identity;
-		playerMovement.gameObject.transform.position = plat.transform.position;
-		playerMovement.ball.transform.localPosition = playerMovement.jumpBottom.localPosition;
+		playerMovementrv.gameObject.transform.rotation = Quaternion.identity;
+		playerMovementrv.gameObject.transform.position = plat.transform.position;
+		playerMovementrv.Ballrv.transform.localPosition = playerMovementrv.JumpBottomrv.localPosition;
 
-		playerMovement.ball.DOKill();
+		playerMovementrv.Ballrv.DOKill();
 
 		swipeToPlay.SetActive(true);
 		secondChanceObject.SetActive(false);

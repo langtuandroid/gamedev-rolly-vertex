@@ -1,68 +1,71 @@
 ﻿using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+namespace GamePlay
 {
-	public static int score;
-	public static int best;
-	public static int multiplier;
-	public static int level;
-	public static int platformsHopped;
-	public static int levelHardnessMultiplier;
+	public class PlayerStatsrv : MonoBehaviour
+	{
+		public static int Scorerv;
+		public static int Bestrv;
+		public static int Multiplierrv;
+		public static int Levelrv;
+		public static int PlatformsHoppedrv;
+		public static int LevelHardnessMultiplierrv;
 	
-	private void Awake()
-	{
-		score = 0;
-		multiplier = 1;
-		platformsHopped = 0;
-		
-		if (!PlayerPrefs.HasKey("best"))
+		private void Awake()
 		{
-			PlayerPrefs.SetInt("best",0);
-			PlayerPrefs.Save();
-		}
+			Scorerv = 0;
+			Multiplierrv = 1;
+			PlatformsHoppedrv = 0;
 		
-		if (!PlayerPrefs.HasKey("level"))
+			if (!PlayerPrefs.HasKey("best"))
+			{
+				PlayerPrefs.SetInt("best",0);
+				PlayerPrefs.Save();
+			}
+		
+			if (!PlayerPrefs.HasKey("level"))
+			{
+				PlayerPrefs.SetInt("level",1);
+				PlayerPrefs.Save();
+			}
+
+			Bestrv = PlayerPrefs.GetInt("best");
+			Levelrv = PlayerPrefs.GetInt("level");
+
+			LevelHardnessMultiplierrv = (int)Mathf.Pow(Mathf.Log(Levelrv), 2);
+			GameManager.Instance.levelMilestone = 30 + LevelHardnessMultiplierrv / 2;
+		}
+
+		public static void IncrementScorerv()
 		{
-			PlayerPrefs.SetInt("level",1);
-			PlayerPrefs.Save();
+			Scorerv += Levelrv * Multiplierrv;
 		}
 
-		best = PlayerPrefs.GetInt("best");
-		level = PlayerPrefs.GetInt("level");
+		public static void IncrementMultiplierrv()
+		{
+			Multiplierrv += 1;
+		}
 
-		levelHardnessMultiplier = (int)Mathf.Pow(Mathf.Log(level), 2);
-		GameManager.Instance.levelMilestone = 30 + levelHardnessMultiplier / 2;
-	}
+		public static void ResetMultiplierrv()
+		{
+			Multiplierrv = 1;
+		}
 
-	public static void IncrementScore()
-	{
-		score += level * multiplier;
-	}
-
-	public static void IncrementMultiplier()
-	{
-		multiplier += 1;
-	}
-
-	public static void ResetMultiplier()
-	{
-		multiplier = 1;
-	}
-
-	public static void IncrementLevel()
-	{
-		level += 1;
-		platformsHopped = 0;
+		public static void IncrementLevelrv()
+		{
+			Levelrv += 1;
+			PlatformsHoppedrv = 0;
 		
-		PlayerPrefs.SetInt("level",level);
-		PlayerPrefs.Save();
+			PlayerPrefs.SetInt("level",Levelrv);
+			PlayerPrefs.Save();
 		
-		levelHardnessMultiplier = (int)Mathf.Pow(Mathf.Log(level), 2);
-		GameManager.Instance.levelMilestone = 30 + levelHardnessMultiplier / 2;
-	}
+			LevelHardnessMultiplierrv = (int)Mathf.Pow(Mathf.Log(Levelrv), 2);
+			GameManager.Instance.levelMilestone = 30 + LevelHardnessMultiplierrv / 2;
+		}
 
-	public static void IncrementPlatformsHopped()
-	{
-		platformsHopped++;
+		public static void IncrementPlatformsHoppedrv()
+		{
+			PlatformsHoppedrv++;
+		}
 	}
 }

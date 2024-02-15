@@ -14,7 +14,7 @@ using UnityEngine;
             {
                 if (!PlayerPrefs.HasKey(key))
                 {
-                    SaveSettings(key, true);
+                    SaveSettings(key, false);
                     PlayerPrefs.Save();
                 }
                 return PlayerPrefs.GetInt(key) == 1;

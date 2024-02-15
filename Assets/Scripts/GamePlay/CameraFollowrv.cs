@@ -2,7 +2,7 @@
 
 namespace GamePlay
 {
-	public class CameraFollow : MonoBehaviour
+	public class CameraFollowrv : MonoBehaviour
 	{
 		[SerializeField]
 		private float _fixedXrv;

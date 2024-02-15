@@ -174,20 +174,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241cd59706008184d81984d8b73521c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 0
-  perfectEffect: {fileID: 4653239683240596}
-  perfect: {fileID: 4436010353842984}
-  hasPerfect: 0
-  score: {fileID: 224417924108291108}
-  scoreText: {fileID: 114625362873398314}
-  platformMaterial: {fileID: 2100000, guid: 00902e034a5a6c54a84dd34f63a22793, type: 2}
-  tempPlatformMaterial: {fileID: 2100000, guid: 864f3cdea2541844284fb77162d85119,
+  _perfectrv: {fileID: 4436010353842984}
+  _perfectEffectrv: {fileID: 4653239683240596}
+  _scorervv: {fileID: 224417924108291108}
+  _scoreTextrv: {fileID: 114625362873398314}
+  _platformMaterialrv: {fileID: 2100000, guid: 00902e034a5a6c54a84dd34f63a22793, type: 2}
+  _tempPlatformMaterialrv: {fileID: 2100000, guid: 864f3cdea2541844284fb77162d85119,
     type: 2}
-  defaultColor: {r: 1, g: 0, b: 0, a: 1}
-  perfectColor: {r: 1, g: 1, b: 1, a: 0}
-  platformRenderer: {fileID: 23549081723251432}
-  platformSizes:
-  - {fileID: 4035634075041782}
+  _defaultColorrv: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 0}
+  _perfectColorrv: {r: 0.764151, g: 0.21381894, b: 0.09011213, a: 0}
+  _platformRendererrv: {fileID: 23549081723251432}
+  _platformSizesrv:
+  - {fileID: 4146419792816524}
   - {fileID: 4035634075041782}
   - {fileID: 4859212860743704}
   - {fileID: 4448336210491202}
