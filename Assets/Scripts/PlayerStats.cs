@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 	public static int platformsHopped;
 	public static int levelHardnessMultiplier;
 	
-	void Start()
+	private void Awake()
 	{
 		score = 0;
 		multiplier = 1;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Audio;
 #if (UNITY_IOS && !UNITY_EDITOR)
 using System.Runtime.InteropServices;
 #endif
@@ -166,10 +167,13 @@ public class iOSHapticFeedback : MonoBehaviour {
     /// </summary>
     public virtual void Trigger(iOSFeedbackType feedbackType)
     {
-        if (FeedbackIdSet((int)feedbackType))
-            TriggerFeedbackGenerator((int)feedbackType, false);
-        else
-            Debug.LogError("You cannot trigger a feedback generator without instantiating it first");
+        if (AudioManager.Instance.IsVirbration)
+        {
+            if (FeedbackIdSet((int)feedbackType))
+                TriggerFeedbackGenerator((int)feedbackType, false);
+            else
+                Debug.LogError("You cannot trigger a feedback generator without instantiating it first");
+        }
     }
 
 

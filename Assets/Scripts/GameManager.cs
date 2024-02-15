@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
-	
 	public TapToStartUI tapToStartUI;
 	public ScoreUI scoreUI;
 	[FormerlySerializedAs("gameOverUI")] public GameOverUIrv gameOverUIrv;
 	public LevelTransitionUI levelTransitionUI;
-	public GameObject playerHolder;
+	
 	public PlayerMovement playerMovement;
+	public GameObject platformHolder;
 
 	public GameObject swipeToPlay;
 
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
 		Instance = this;
 		Application.targetFrameRate = 60;
 	}
-
+	
 	private void Start()
 	{
 		tapToStartUI.gameObject.SetActive(true);
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
 
 		ColorSelection(PlayerPrefs.GetInt("Color", 0));
     }
+	
 
 	private void Update()
 	{
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
 	
 	public GameObject GetPlayerHolder()
 	{
-		return playerHolder;
+		return playerMovement.gameObject;
 	}
 
 	public void StartGame()
@@ -93,12 +96,17 @@ public class GameManager : MonoBehaviour
 			PlayerStats.best = PlayerStats.score;
 			PlayerPrefs.SetInt("best", PlayerStats.best);
 			PlayerPrefs.Save();
+			 
 		}
 		
 		#if (UNITY_ANDROID)
+      if (AudioManager.Instance.IsVirbration)
+      {
+        Vibration.VibratePeek();        
+      }
 		#else
 		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Failure);
-		#endif
+#endif
 
 		DeathCounterrv.counterrv++;
 
@@ -111,9 +119,11 @@ public class GameManager : MonoBehaviour
 	{
 		PlayerStats.IncrementLevel();
 #if (UNITY_ANDROID)
-		#else
-			iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Success);
-		#endif
+if (AudioManager.Instance.IsVirbration)
+{Vibration.VibratePop();}
+#else
+		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Success);
+#endif
 
 		StartCoroutine(LevelTransition());
 	}
@@ -124,8 +134,11 @@ public class GameManager : MonoBehaviour
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
 		levelTransitionUI.gameObject.SetActive(true);
 		yield return new WaitForSeconds(0.22f);
+		AudioManager.Instance.PlaySFXOneShot(3);
 		LevelPassrv.Instancerv.DestroyLevelPass();
 		#if (UNITY_ANDROID)
+		if (AudioManager.Instance.IsVirbration)
+         {Vibration.VibratePop();}
 		#else
 			iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.ImpactMedium);
 		#endif
@@ -187,15 +200,15 @@ public class GameManager : MonoBehaviour
 			var plat = platforms[0];
 
 			for (int i = 0; i < platforms.Count; i++) {
-				if (platforms[i].transform.position.z - playerHolder.transform.position.z < min) {
-					min = platforms[i].transform.position.z - playerHolder.transform.position.z;
+				if (platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z < min) {
+					min = platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z;
 					plat = platforms[i];
 				}
 			}
 
 			plat.transform.rotation = Quaternion.identity;
-			playerHolder.transform.rotation = Quaternion.identity;
-			playerHolder.transform.position = plat.transform.position;
+			playerMovement.gameObject.transform.rotation = Quaternion.identity;
+			playerMovement.gameObject.transform.position = plat.transform.position;
 			playerMovement.ball.transform.localPosition = playerMovement.jumpBottom.localPosition;
 
 			playerMovement.ball.DOKill();
@@ -204,8 +217,6 @@ public class GameManager : MonoBehaviour
 			secondChanceObject.SetActive(false);
 			secondChance = true;
 		};
-
-		//AdsManager.ShowRewarded(reward);
 	}
 
 	public void SecondChanceWithoutAd() 
@@ -219,15 +230,15 @@ public class GameManager : MonoBehaviour
 
 		for (int i = 0; i < platforms.Count; i++) 
 		{
-			if (platforms[i].transform.position.z - playerHolder.transform.position.z < min) {
-				min = platforms[i].transform.position.z - playerHolder.transform.position.z;
+			if (platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z < min) {
+				min = platforms[i].transform.position.z - playerMovement.gameObject.transform.position.z;
 				plat = platforms[i];
 			}
 		}
 
 		plat.transform.rotation = Quaternion.identity;
-		playerHolder.transform.rotation = Quaternion.identity;
-		playerHolder.transform.position = plat.transform.position;
+		playerMovement.gameObject.transform.rotation = Quaternion.identity;
+		playerMovement.gameObject.transform.position = plat.transform.position;
 		playerMovement.ball.transform.localPosition = playerMovement.jumpBottom.localPosition;
 
 		playerMovement.ball.DOKill();

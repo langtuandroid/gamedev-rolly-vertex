@@ -24,21 +24,34 @@ public class ScoreUI : MonoBehaviour
 	public string secondMotivationText = "Great!";
 	public string[] motivationTexts;
 	
-	void Awake()
+	private void Awake()
 	{
 		Instance = this;
 	}
 	
-	void Update()
+	private void Update()
+	{
+		UpdateTextFields();
+		UpdateProgressBar();
+	}
+	
+	private void OnDestroy()
+	{
+		DOTween.KillAll();
+	}
+
+	private void UpdateTextFields()
 	{
 		score.text = PlayerStats.score + "";
 		best.text = "best: " + PlayerStats.best;
-		
 		currentLevel.text = PlayerStats.level + "";
-		nextLevel.text = PlayerStats.level + 1 + "";
+		nextLevel.text = (PlayerStats.level + 1) + "";
+	}
 
-		bar.DOFillAmount((float) PlayerStats.platformsHopped / GameManager.Instance.levelMilestone, 0.25f);
-		//bar.fillAmount = (float) PlayerStats.platformsHopped / GameManager.Instance.levelMilestone;
+	private void UpdateProgressBar()
+	{
+		float progress = (float)PlayerStats.platformsHopped / GameManager.Instance.levelMilestone;
+		DOTween.To(() => bar.fillAmount, x => bar.fillAmount = x, progress, 0.25f);
 	}
 
 	public void CreateScorePopUp()

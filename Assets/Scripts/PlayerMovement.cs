@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Audio;
+using UnityEngine;
 using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
 		doMovement = true;
 		doHorizontalMovement = true;
 		secondStep = false;
+	}
+
+	private void OnDestroy()
+	{
+		DOTween.KillAll();
 	}
 
 	public void StartMovement()
@@ -63,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 					hit.transform.parent.DOScale(new Vector3(1.5f, 1, 1.5f), 0.1f).SetLoops(2,LoopType.Yoyo);
 
 					Platform currentPlatform = hit.transform.GetComponentInParent<Platform>();
-					
+					AudioManager.Instance.PlaySFXOneShot(2);
 					// executes if hit a perfect
 					if ( currentPlatform.hasPerfect )
 					{
@@ -73,16 +80,21 @@ public class PlayerMovement : MonoBehaviour
 							ScoreUI.Instance.CreateMotivationPopUp(PlayerStats.multiplier);
 							//currentPlatform.PerfectColor();
 							currentPlatform.PlayPerfectEffect();
+							AudioManager.Instance.PlaySFXOneShot(4);
 						}
 						else
 						{
 							PlayerStats.ResetMultiplier();
 						}
+						
 						#if (UNITY_ANDROID)
-
+                        if (AudioManager.Instance.IsVirbration)
+						{
+							Vibration.VibratePop();
+						}
 						#else
 						iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.ImpactLight);
-						#endif
+                        #endif
 					}
 					
 					//ScoreUI.Instance.CreateScorePopUp();
@@ -108,10 +120,12 @@ public class PlayerMovement : MonoBehaviour
 
 	void EndGame()
 	{
+		AudioManager.Instance.PlaySFXOneShot(5);
 		DOTween.KillAll();
 		ball.DOLocalMoveY(-20f, 1f);
 		doMovement = false;
 		GameManager.Instance.EndGame();
+		
 	}
 	
 	void Update()
