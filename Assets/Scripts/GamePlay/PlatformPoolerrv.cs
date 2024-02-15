@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GamePlay;
 using UnityEngine;
 
 public class PlatformPooler : MonoBehaviour
@@ -17,19 +18,18 @@ public class PlatformPooler : MonoBehaviour
 	public GameObject platformPrefab;
 	public Transform platformParent;
 
-	void Awake()
+	private void Awake()
 	{
 		Instance = this;
 	}
 	
-	// Use this for initialization
-	void Start () 
+	private void Start () 
 	{
 		CreateInitialPlatforms();
 		PlaceInitialPlatforms();
 	}
 
-	void CreateInitialPlatforms()
+	private void CreateInitialPlatforms()
 	{
 		for (int i = 0; i < 30; i++)
 		{
@@ -39,7 +39,7 @@ public class PlatformPooler : MonoBehaviour
 		}
 	}
 
-	void PlaceInitialPlatforms()
+	private void PlaceInitialPlatforms()
 	{
 		Vector3 pos = Vector3.zero;
 		Vector3 rot = Vector3.zero;
@@ -61,12 +61,12 @@ public class PlatformPooler : MonoBehaviour
 		StartCoroutine(DestroyPlatformCor(platform, time));
 	}
 	
-	void DestroyPlatform(GameObject platform)
+	private void DestroyPlatform(GameObject platform)
 	{
 		StartCoroutine(DestroyPlatformCor(platform, 0));
 	}
 
-	IEnumerator DestroyPlatformCor(GameObject platform, float time)
+	private IEnumerator DestroyPlatformCor(GameObject platform, float time)
 	{
 		// Wait the wanted amount to destroy te platform
 		yield return new WaitForSeconds(time);
@@ -89,17 +89,17 @@ public class PlatformPooler : MonoBehaviour
 		platformToBeDisabled.SetActive(false);
 		
 		// Gets the platfrom component for future uses
-		Platform _platform = platformToBeDisabled.GetComponent<Platform>();
+		Platformrv platformrv = platformToBeDisabled.GetComponent<Platformrv>();
 		
 		// Resets the platform values
-		_platform.ResetEverything();
+		platformrv.ResetEverythingrv();
 		
 		// Removes the platform from the active list and add to the inactive list
 		activePlatforms.RemoveAt(index);
 		inactivePlatforms.Add(platformToBeDisabled);
 	}
 
-	void CreatePlatform( Vector3 _position, Vector3 _rotation, bool dullPlatform )
+	private void CreatePlatform( Vector3 _position, Vector3 _rotation, bool dullPlatform )
 	{
 		// Gets the first platform from the inactive list
 		GameObject platformToBeCreated = inactivePlatforms[0];
@@ -110,7 +110,7 @@ public class PlatformPooler : MonoBehaviour
 		platformToBeCreated.transform.rotation = Quaternion.Euler(_rotation);
 
 		// Gets the platform component for future applications
-		Platform _platform = platformToBeCreated.GetComponent<Platform>();
+		Platformrv platformrv = platformToBeCreated.GetComponent<Platformrv>();
 		
 		// Picks a random value between 0 - 100
 		float randValue = Random.Range(0f, 100f);
@@ -121,19 +121,19 @@ public class PlatformPooler : MonoBehaviour
 			// There is a 12.5 percent chance that the platform will have a perfect
 			if (randValue <= 12.5f)
 			{
-				_platform.SetPerfect();
+				platformrv.SetPerfectrv();
 			}
 		
 			// There is a 5 percent chance that the platform will be able to move
 			if (randValue <= PlayerStats.levelHardnessMultiplier)
 			{
-				_platform.SetMoveable();
+				platformrv.SetMoveablerv();
 			}
 		
 			// There is a 10 percent chance that the platform will be at a random size
 			if (randValue <= 50f + PlayerStats.levelHardnessMultiplier)
 			{
-				_platform.RandomSize();
+				platformrv.RandomSizerv();
 			}
 		}
 		

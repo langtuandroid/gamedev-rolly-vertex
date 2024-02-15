@@ -21,13 +21,13 @@ public class GameOverUIrv : MonoBehaviour
 		_bestrv.gameObject.SetActive(false);
 	}
 	
-	public void ShowNewBestScore()
+	public void ShowNewBestScorerv()
 	{
 		_bestrv.text = "New Best: " + PlayerStats.score;
 		_bestrv.gameObject.SetActive(true);
 	}
 
-	public void Restart()
+	public void Restartrv()
 	{
 		GameManager.Instance.RestartGame();
 	}

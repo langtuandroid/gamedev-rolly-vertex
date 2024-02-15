@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TubePooler : MonoBehaviour {
+public class TubePoolerrv : MonoBehaviour 
+{
+	public static TubePoolerrv Instancerv;
 
-	public static TubePooler Instance;
+	[SerializeField]
+	private float tubeCount;
+	[SerializeField]
+	private float tubeGapDistance;
+	[SerializeField]
+	private GameObject tubePrefab;
+	[SerializeField]
+	private Transform tubeParent;
+	[SerializeField]
+	private Vector3 lastTubePosition;
+	[SerializeField]
+	private List<GameObject> activeTubes;
+	[SerializeField]
+	private List<GameObject> inactiveTubes;
 
-	public float tubeCount;
-	public float tubeGapDistance;
-	public Vector3 lastTubePosition;
-	
-	public List<GameObject> activeTubes;
-	public List<GameObject> inactiveTubes;
-	
-	public GameObject tubePrefab;
-	public Transform tubeParent;
-	
-	void Awake()
+	private void Awake()
 	{
-		Instance = this;
+		Instancerv = this;
 	}
 	
-	// Use this for initialization
-	void Start () 
+	private void Start () 
 	{
-		CreateInitialTubes();
-		PlaceInitialTubes();
+		CreateInitialTubesrv();
+		PlaceInitialTubesrv();
 	}
-	
-	
-	void CreateInitialTubes()
+
+	private void CreateInitialTubesrv()
 	{
 		for (int i = 0; i < 30; i++)
 		{
@@ -39,18 +42,18 @@ public class TubePooler : MonoBehaviour {
 		}
 	}
 
-	void PlaceInitialTubes()
+	private void PlaceInitialTubesrv()
 	{
 		Vector3 pos = Vector3.zero;
 		for (int i = 0; i < tubeCount; i++)
 		{
 			pos.z = (i * tubeGapDistance) - 20;
 			
-			CreateTube(pos);
+			CreateTuberv(pos);
 		}
 	}
 	
-	void CreateTube( Vector3 _position)
+	private void CreateTuberv( Vector3 _position)
 	{
 		GameObject tubeToBeCreated = inactiveTubes[0];
 		tubeToBeCreated.SetActive(true);
@@ -60,24 +63,24 @@ public class TubePooler : MonoBehaviour {
 		activeTubes.Add(tubeToBeCreated);
 	}
 	
-	public void CreateNextPlatform()
+	public void CreateNextPlatformrv()
 	{
 		Vector3 position = lastTubePosition;
 		position.z += tubeGapDistance;
-		CreateTube(position);
+		CreateTuberv(position);
 	}
 	
-	public void DestroyTube(GameObject platform, float time)
+	public void DestroyTuberv(GameObject platform, float time)
 	{
-		StartCoroutine(DestroyTubeCor(platform, time));
+		StartCoroutine(DestroyTubeCorrv(platform, time));
 	}
 	
-	void DestroyTube(GameObject platform)
+	private void DestroyTuberv(GameObject platform)
 	{
-		StartCoroutine(DestroyTubeCor(platform, 0));
+		StartCoroutine(DestroyTubeCorrv(platform, 0));
 	}
 
-	IEnumerator DestroyTubeCor(GameObject platform, float time)
+	IEnumerator DestroyTubeCorrv(GameObject platform, float time)
 	{
 		yield return new WaitForSeconds(time);
 
