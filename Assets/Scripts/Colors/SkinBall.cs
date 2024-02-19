@@ -15,6 +15,7 @@ namespace Colors
         public void SetSkin(int index)
         {
             SelectedSkinMaterial = _allBallSkins[index];
+            PlayerPrefs.SetInt("skinBall",index);
         }
 
         public Material LoadSelectedSkin() => SelectedSkinMaterial;
