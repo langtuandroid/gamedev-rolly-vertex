@@ -13,7 +13,11 @@ namespace UI
         [SerializeField]
         private Button _settingsrv;
         [SerializeField]
+        private Button _skinBallrv;
+        [SerializeField]
         private GameObject _settingsPopuprv;
+        [SerializeField]
+        private GameObject _skinBallPopuprv;
         
         [SerializeField]
         private TextMeshProUGUI _currentLevelrv;
@@ -24,6 +28,7 @@ namespace UI
         {
             _playGamerv.onClick.AddListener(LoadGame);
             _settingsrv.onClick.AddListener(ShowHideSettingsPopup);
+            _skinBallrv.onClick.AddListener(ShowHideSkinBallPopup);
         }
 
         private void Start()
@@ -38,12 +43,22 @@ namespace UI
         {
             _playGamerv.onClick.RemoveListener(LoadGame);
             _settingsrv.onClick.RemoveListener(ShowHideSettingsPopup);
+            _skinBallrv.onClick.RemoveListener(ShowHideSkinBallPopup);
         }
         
         private void ShowHideSettingsPopup()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
             _settingsPopuprv.SetActive(!_settingsPopuprv.activeSelf);
+            _skinBallPopuprv.SetActive(false);
+            AudioManager.Instance.PlaySFXOneShot(1);
+        }
+        
+        private void ShowHideSkinBallPopup()
+        {
+            AudioManager.Instance.PlaySFXOneShot(0);
+            _skinBallPopuprv.SetActive(!_skinBallPopuprv.activeSelf);
+            _settingsPopuprv.SetActive(false);
             AudioManager.Instance.PlaySFXOneShot(1);
         }
 

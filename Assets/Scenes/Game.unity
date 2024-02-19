@@ -1103,6 +1103,8 @@ MonoBehaviour:
   _thresholdrv: 5
   _speedrv: 180
   _tempPlatformrvrv: {fileID: 2020838362}
+  _skinBall: {fileID: 11400000, guid: 93bd942b11a5b4f4a8872e653ead22bd, type: 2}
+  _ballMesh: {fileID: 1067084538}
   colors:
   - {r: 0, g: 0.6538385, b: 2.270603, a: 0}
   - {r: 1.2006853, g: 2.270603, b: 2.270603, a: 0}

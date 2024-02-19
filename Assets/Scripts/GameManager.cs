@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using Audio;
+using Colors;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
 	private float _speedrv;
 	[SerializeField]
 	private Platformrv _tempPlatformrvrv;
+	[SerializeField]
+	private SkinBall _skinBall;
+
+	[SerializeField] 
+	private MeshRenderer _ballMesh;
 
 	[ColorUsage(true,true)]
 	public List<Color> colors;
@@ -67,9 +73,14 @@ public class GameManager : MonoBehaviour
 		gameOverUIrv.gameObject.SetActive(false);
 		levelTransitionUIrv.gameObject.SetActive(false);
         _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, _thresholdrv);
-
+        LoadSkinBall();
 		ColorSelectionrv(PlayerPrefs.GetInt("Color", 0));
     }
+
+	private void LoadSkinBall()
+	{
+		_ballMesh.material = _skinBall.LoadSelectedSkin();
+	}
 	
 
 	private void Update()
