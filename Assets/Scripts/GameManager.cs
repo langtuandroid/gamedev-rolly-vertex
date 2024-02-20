@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] 
 	private MeshRenderer _ballMesh;
+	[SerializeField] 
+	private TrailRenderer _ballMeshTrail;
 
 	[ColorUsage(true,true)]
 	public List<Color> colors;
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
 	private void LoadSkinBall()
 	{
 		_ballMesh.material = _skinBall.LoadSelectedSkin();
+		_ballMeshTrail.material = _skinBall.LoadSelectedSkin();
 	}
 	
 
