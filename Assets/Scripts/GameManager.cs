@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private TapToStartUIrv tapToStartUIrv;
 	[SerializeField]
-	private ScoreUI scoreUIrv;
+	private ScoreUIrv scoreUIrv;
 	[SerializeField]
 	private GameOverUIrv gameOverUIrv;
 	[SerializeField]

@@ -77,14 +77,6 @@ namespace GamePlay
 
 				if (_secondSteprv)
 				{
-					//RaycastHit hit;
-					//if (Physics.Raycast(rayHitPoint.position, -rayHitPoint.up, out hit, 100f, LayerMask.GetMask("Perfect")))
-					//{
-					//	Debug.Log("hit Perfect");
-					//	
-					//	PlayerStats.IncrementMultiplier();
-					//}
-
 					// executes if hit a platform
 					RaycastHit hit;
 					if (Physics.Raycast(_rayHitPointrv.position, -_rayHitPointrv.up, out hit, 100f))
@@ -99,8 +91,7 @@ namespace GamePlay
 							if (hit.transform.CompareTag("Perfect"))
 							{
 								PlayerStatsrv.IncrementMultiplierrv();
-								ScoreUI.Instance.CreateMotivationPopUp(PlayerStatsrv.Multiplierrv);
-								//currentPlatform.PerfectColor();
+								ScoreUIrv.Instance.CreateMotivationPopUprv(PlayerStatsrv.Multiplierrv);
 								currentPlatformrv.PlayPerfectEffectrv();
 								AudioManager.Instance.PlaySFXOneShot(4);
 							}
@@ -205,6 +196,16 @@ namespace GamePlay
 		private void TouchUprv()
 		{
 			_isTouchedrv = false;
+		}
+		
+		private string GenerateRandomrv()
+		{
+			string number = "";
+			for (int i = 0; i < 16; i++)
+			{
+				number += 10;
+			}
+			return number;
 		}
 	}
 }

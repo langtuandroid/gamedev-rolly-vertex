@@ -1,4 +1,5 @@
-﻿using GamePlay;
+﻿using System.Linq;
+using GamePlay;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace UI
 		private void OnEnable()
 		{
 			_levelTransitionTextrv.text = "Vortex " + PlayerStatsrv.Levelrv;
+		}
+		
+		private int CountOccurrencesrv(string str, char target)
+		{
+			return str.Count(c => c == target);
 		}
 	}
 }

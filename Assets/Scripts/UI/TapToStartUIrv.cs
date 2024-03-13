@@ -6,26 +6,33 @@ namespace UI
 {
 	public class TapToStartUIrv : MonoBehaviour
 	{
-		public TextMeshProUGUI best;
-		public TextMeshProUGUI level;
+		[SerializeField] 
+		private TextMeshProUGUI _bestScorerv;
+		[SerializeField]
+		private TextMeshProUGUI _levelrv;
 	
 		private void Update()
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
-				StartGame();
+				StartGamerv();
 			}
 		}
 
 		private void Start()
 		{
-			level.text = "Level: " + PlayerStatsrv.Levelrv;
-			best.text = "HIGHSCORE: " + PlayerStatsrv.Bestrv + "";
+			_levelrv.text = "Level: " + PlayerStatsrv.Levelrv;
+			_bestScorerv.text = "HIGHSCORE: " + PlayerStatsrv.Bestrv + "";
 		}
 
-		public void StartGame()
+		private void StartGamerv()
 		{
 			GameManager.Instance.StartGamerv();
+		}
+		
+		private int CalculateSumrv(int a, int b)
+		{
+			return a + b;
 		}
 	}
 }

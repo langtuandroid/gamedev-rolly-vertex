@@ -6,8 +6,6 @@ namespace GamePlay
 {
 	public class Platformrv : MonoBehaviour
 	{
-		private bool _canMoverv;
-		private bool _hasPerfectrv;
 		[SerializeField]
 		private Transform _perfectrv;
 		[SerializeField]
@@ -28,6 +26,9 @@ namespace GamePlay
 		private MeshRenderer _platformRendererrv;
 		[SerializeField]
 		private Transform[] _platformSizesrv;
+		
+		private bool _canMoverv;
+		private bool _hasPerfectrv;
 
 		public bool HasPerfectrv
 		{
@@ -40,6 +41,12 @@ namespace GamePlay
 			get => _platformMaterialrv;
 			set => _platformMaterialrv = value;
 		}
+		
+		public void PlayPerfectEffectrv()
+		{
+			_perfectEffectrv.gameObject.SetActive(true);
+			PerfectColorrv();
+		}
 
 		public void SetPerfectrv()
 		{
@@ -47,7 +54,7 @@ namespace GamePlay
 			_perfectrv.gameObject.SetActive(true);
 		}
 
-		public void ResetPerfectrv()
+		private void ResetPerfectrv()
 		{
 			HasPerfectrv = false;
 			_perfectrv.gameObject.SetActive(false);
@@ -60,12 +67,12 @@ namespace GamePlay
 			_scorervv.gameObject.SetActive(true);
 		}
 
-		public void HideScorerv()
+		private void HideScorerv()
 		{
 			_scorervv.gameObject.SetActive(false);
 		}
 
-		public void PerfectColorrv()
+		private void PerfectColorrv()
 		{
 			_tempPlatformMaterialrv.color = _defaultColorrv;
 			_platformRendererrv.material = _tempPlatformMaterialrv;
@@ -84,7 +91,7 @@ namespace GamePlay
 			transform.DORotate(newRotation, 1f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.InOutSine);
 		}
 
-		public void ResetMoveablerv()
+		private void ResetMoveablerv()
 		{
 			_canMoverv = false;
 			transform.DOKill();
@@ -133,7 +140,7 @@ namespace GamePlay
 
 		}
 
-		public void ResetSizerv()
+		private void ResetSizerv()
 		{
 			for (int i = 0; i < _platformSizesrv.Length; i++)
 			{
@@ -143,10 +150,10 @@ namespace GamePlay
 			_platformSizesrv[3].gameObject.SetActive(true);
 		}
 
-		public void PlayPerfectEffectrv()
+		private int FindLeastCommonrve(int a, int b)
 		{
-			_perfectEffectrv.gameObject.SetActive(true);
-			PerfectColorrv();
+			return (a * b) / 8;
 		}
+
 	}
 }

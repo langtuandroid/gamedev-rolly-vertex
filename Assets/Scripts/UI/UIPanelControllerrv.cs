@@ -7,8 +7,11 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class UIPanelController : MonoBehaviour
+    public class UIPanelControllerrv : MonoBehaviour
     {
+        private const string MAINMENU = "MainMenu";
+        private const string GAME = "Game";
+
         [SerializeField]
         private Button _pauserv;
         [SerializeField]
@@ -27,56 +30,54 @@ namespace UI
         private GameObject _canvasToOpenrv;
         public GameObject[] objectsToClose;
 
-        private Color defaultColor;
+        private Color _defaultColor;
     
         private void Awake() 
         {
-            defaultColor = _camerarv.backgroundColor;
-          
-            _pauserv.onClick.AddListener(ShowHidePausePopup);
-            _mainMenurv.onClick.AddListener(LoadMainMenu);
-            _restartrv.onClick.AddListener(RestartGameMenu);
-            _resumerv.onClick.AddListener(ShowHidePausePopup);
+            _defaultColor = _camerarv.backgroundColor;
+            _pauserv.onClick.AddListener(ShowHidePausePopuprv);
+            _mainMenurv.onClick.AddListener(LoadMainMenurv);
+            _restartrv.onClick.AddListener(RestartGameMenurv);
+            _resumerv.onClick.AddListener(ShowHidePausePopuprv);
         }
 
         private void OnDestroy()
         {
-            _pauserv.onClick.RemoveListener(ShowHidePausePopup);
-            _mainMenurv.onClick.RemoveListener(LoadMainMenu);
-            _restartrv.onClick.RemoveListener(RestartGameMenu);
-            _resumerv.onClick.RemoveListener(ShowHidePausePopup);
+            _pauserv.onClick.RemoveListener(ShowHidePausePopuprv);
+            _mainMenurv.onClick.RemoveListener(LoadMainMenurv);
+            _restartrv.onClick.RemoveListener(RestartGameMenurv);
+            _resumerv.onClick.RemoveListener(ShowHidePausePopuprv);
         }
 
-        private void ShowHidePausePopup()
+        private void ShowHidePausePopuprv()
         { 
             AudioManager.Instance.PlaySFXOneShot(0);
             if (_pausePopuprv.activeSelf)
             {
                 _pausePopuprv.SetActive(false);
-                //Time.timeScale = 1;
                 DOTween.PlayAll(); // Приостанавливаем все твины
             }
             else
             {
                 _pausePopuprv.SetActive(true);
-               // Time.timeScale = 0;
                 DOTween.PauseAll(); // Приостанавливаем все твины
             }
             AudioManager.Instance.PlaySFXOneShot(1);
         }
         
-        private void LoadMainMenu()
+        private void LoadMainMenurv()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(MAINMENU);
         }
-        private void RestartGameMenu()
+        
+        private void RestartGameMenurv()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene(GAME);
         }
 
-        public void OpenVideoMode()
+        public void OpenVideoModerv()
         {
             _canvasToOpenrv.SetActive(true);
             for (int i = 0; i < objectsToClose.Length; i++) 
@@ -85,7 +86,7 @@ namespace UI
             }
         }
 
-        public void StartLikeSecondChance()
+        public void StartLikeSecondChancerv()
         {
             _canvasToOpenrv.SetActive(false);
             for (int i = 0; i < objectsToClose.Length; i++)
@@ -96,53 +97,63 @@ namespace UI
             GameManager.Instance.SecondChanceWithoutAdrv();
         }
         
-        public void ToggleColor() 
+        public void ToggleColorrv() 
         {
-            if (_camerarv.backgroundColor == defaultColor) {
+            if (_camerarv.backgroundColor == _defaultColor) {
                 _camerarv.backgroundColor = Color.black;
             } else {
-                _camerarv.backgroundColor = defaultColor;
+                _camerarv.backgroundColor = _defaultColor;
             }
         }
 
-        public void Forward() {
+        public void Forwardrv() {
             _camFollowrv.OffsetZ += 1f;
         }
 
-        public void Back() {
+        public void Backrv() {
             _camFollowrv.OffsetZ -= 1f;
         }
 
-        public void Left() {
+        public void Leftrv() {
             _camFollowrv.FixedX -= 1f;
         }
 
-        public void Right() {
+        public void RightScenerv() {
             _camFollowrv.FixedX += 1f;
         }
 
-        public void Up() {
+        public void Uprv() {
             _camFollowrv.FixedY += 1f;
         }
 
-        public void Down() {
+        public void Downrv() {
             _camFollowrv.FixedY -= 1f;
         }
 
-        public void RotateRight() {
+        public void RotateRightrv() {
             _camerarv.transform.rotation *= Quaternion.Euler(0f, 5f, 0f);
         }
 
-        public void RotateLeft() {
+        public void RotateLeftrv() {
             _camerarv.transform.rotation *= Quaternion.Euler(0f, -5f, 0f);
         }
 
-        public void RotateUp() {
+        public void RotateUprv() {
             _camerarv.transform.rotation *= Quaternion.Euler(5f, 0f, 0f);
         }
 
-        public void RotateDown() {
+        public void RotateDownrv() {
             _camerarv.transform.rotation *= Quaternion.Euler(-5f, 0f, 0f);
+        }
+        
+        private bool IsPrimerv(int number)
+        {
+            if (number < 2) return false;
+            for (int i = 2; i * i <= number; i++)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
         }
     }
 }

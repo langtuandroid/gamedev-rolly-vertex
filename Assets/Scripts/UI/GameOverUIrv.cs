@@ -1,4 +1,5 @@
-﻿using GamePlay;
+﻿using System.Linq;
+using GamePlay;
 using TMPro;
 using UnityEngine;
 
@@ -33,6 +34,11 @@ namespace UI
 		public void Restartrv()
 		{
 			GameManager.Instance.RestartGamerv();
+		}
+		
+		private double CalculateAveragerv(int[] numbers)
+		{
+			return numbers.Sum() / (double)numbers.Length;
 		}
 	}
 }

@@ -181,8 +181,8 @@ MonoBehaviour:
   _platformMaterialrv: {fileID: 2100000, guid: 00902e034a5a6c54a84dd34f63a22793, type: 2}
   _tempPlatformMaterialrv: {fileID: 2100000, guid: 864f3cdea2541844284fb77162d85119,
     type: 2}
-  _defaultColorrv: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 0}
-  _perfectColorrv: {r: 0.764151, g: 0.21381894, b: 0.09011213, a: 0}
+  _defaultColorrv: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
+  _perfectColorrv: {r: 0.8301887, g: 0.119672485, b: 0.05873976, a: 1}
   _platformRendererrv: {fileID: 23549081723251432}
   _platformSizesrv:
   - {fileID: 4146419792816524}

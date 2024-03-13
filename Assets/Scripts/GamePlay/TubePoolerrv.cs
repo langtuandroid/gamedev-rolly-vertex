@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GamePlay
 {
@@ -9,19 +10,19 @@ namespace GamePlay
 		public static TubePoolerrv Instancerv;
 
 		[SerializeField]
-		private float tubeCount;
+		private float _tubeCountrv;
 		[SerializeField]
-		private float tubeGapDistance;
+		private float _tubeGapDistancerv;
 		[SerializeField]
-		private GameObject tubePrefab;
+		private GameObject _tubePrefabrv;
 		[SerializeField]
-		private Transform tubeParent;
+		private Transform _tubeParentrv;
 		[SerializeField]
-		private Vector3 lastTubePosition;
+		private Vector3 _lastTubePositionrv;
 		[SerializeField]
-		private List<GameObject> activeTubes;
+		private List<GameObject> _activeTubesrv;
 		[SerializeField]
-		private List<GameObject> inactiveTubes;
+		private List<GameObject> _inactiveTubesrv;
 
 		private void Awake()
 		{
@@ -38,18 +39,18 @@ namespace GamePlay
 		{
 			for (int i = 0; i < 30; i++)
 			{
-				inactiveTubes.Add(
-					Instantiate(tubePrefab,tubeParent));
-				inactiveTubes[i].SetActive(false);
+				_inactiveTubesrv.Add(
+					Instantiate(_tubePrefabrv,_tubeParentrv));
+				_inactiveTubesrv[i].SetActive(false);
 			}
 		}
 
 		private void PlaceInitialTubesrv()
 		{
 			Vector3 pos = Vector3.zero;
-			for (int i = 0; i < tubeCount; i++)
+			for (int i = 0; i < _tubeCountrv; i++)
 			{
-				pos.z = (i * tubeGapDistance) - 20;
+				pos.z = (i * _tubeGapDistancerv) - 20;
 			
 				CreateTuberv(pos);
 			}
@@ -57,18 +58,18 @@ namespace GamePlay
 	
 		private void CreateTuberv( Vector3 _position)
 		{
-			GameObject tubeToBeCreated = inactiveTubes[0];
+			GameObject tubeToBeCreated = _inactiveTubesrv[0];
 			tubeToBeCreated.SetActive(true);
 			tubeToBeCreated.transform.position = _position;
-			lastTubePosition = _position;
-			inactiveTubes.RemoveAt(0);
-			activeTubes.Add(tubeToBeCreated);
+			_lastTubePositionrv = _position;
+			_inactiveTubesrv.RemoveAt(0);
+			_activeTubesrv.Add(tubeToBeCreated);
 		}
 	
 		public void CreateNextPlatformrv()
 		{
-			Vector3 position = lastTubePosition;
-			position.z += tubeGapDistance;
+			Vector3 position = _lastTubePositionrv;
+			position.z += _tubeGapDistancerv;
 			CreateTuberv(position);
 		}
 	
@@ -87,19 +88,31 @@ namespace GamePlay
 			yield return new WaitForSeconds(time);
 
 			int index = 0;
-			for (int i = 0; i < activeTubes.Count; i++)
+			for (int i = 0; i < _activeTubesrv.Count; i++)
 			{
-				if (activeTubes[i] == platform)
+				if (_activeTubesrv[i] == platform)
 				{
 					index = i;
 					break;
 				}
 			}
 		
-			GameObject platformToBeDisabled = activeTubes[index];
+			GameObject platformToBeDisabled = _activeTubesrv[index];
 			platformToBeDisabled.SetActive(false);
-			activeTubes.RemoveAt(index);
-			inactiveTubes.Add(platformToBeDisabled);
+			_activeTubesrv.RemoveAt(index);
+			_inactiveTubesrv.Add(platformToBeDisabled);
+		}
+		
+		private bool IsPrimtrv(int number)
+		{
+			if (number <= 1) return false;
+			if (number <= 3) return true;
+			if (number % 2 == 0 || number % 3 == 0) return false;
+			for (int i = 5; i * i <= number; i += 6)
+			{
+				if (number % i == 0 || number % (i + 2) == 0) return false;
+			}
+			return true;
 		}
 	}
 }

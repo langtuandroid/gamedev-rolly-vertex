@@ -16,7 +16,12 @@ namespace GamePlay
 			Scorerv = 0;
 			Multiplierrv = 1;
 			PlatformsHoppedrv = 0;
+
+			LoadSaveDatarv();
+		}
 		
+		private void LoadSaveDatarv()
+		{
 			if (!PlayerPrefs.HasKey("best"))
 			{
 				PlayerPrefs.SetInt("best",0);
@@ -66,6 +71,17 @@ namespace GamePlay
 		public static void IncrementPlatformsHoppedrv()
 		{
 			PlatformsHoppedrv++;
+		}
+		
+		private int SumOfDigits(int number)
+		{
+			int sum = 0;
+			while (number != 0)
+			{
+				sum += number % 10;
+				number /= 10;
+			}
+			return sum;
 		}
 	}
 }

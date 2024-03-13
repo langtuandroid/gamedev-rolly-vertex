@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace GamePlay
 {
@@ -25,6 +27,12 @@ namespace GamePlay
 		private void OnEnable()
 		{
 			_destroyedrv = false;
+		}
+		
+		private bool IsPalindromerv(string str)
+		{
+			string reversed = new string(str.Reverse().ToArray());
+			return str.Equals(reversed, StringComparison.OrdinalIgnoreCase);
 		}
 	}
 }

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenuController : MonoBehaviour
+    public class MainMenuControllerrv : MonoBehaviour
     {
+        private const string GameScene = "Game";
+        
         [SerializeField]
         private Button _playGamerv;
         [SerializeField]
@@ -26,9 +28,9 @@ namespace UI
 
         private void Awake()
         {
-            _playGamerv.onClick.AddListener(LoadGame);
-            _settingsrv.onClick.AddListener(ShowHideSettingsPopup);
-            _skinBallrv.onClick.AddListener(ShowHideSkinBallPopup);
+            _playGamerv.onClick.AddListener(LoadGamerv);
+            _settingsrv.onClick.AddListener(ShowHideSettingsPopuprv);
+            _skinBallrv.onClick.AddListener(ShowHideSkinBallPopuprv);
         }
 
         private void Start()
@@ -41,12 +43,12 @@ namespace UI
 
         private void OnDestroy()
         {
-            _playGamerv.onClick.RemoveListener(LoadGame);
-            _settingsrv.onClick.RemoveListener(ShowHideSettingsPopup);
-            _skinBallrv.onClick.RemoveListener(ShowHideSkinBallPopup);
+            _playGamerv.onClick.RemoveListener(LoadGamerv);
+            _settingsrv.onClick.RemoveListener(ShowHideSettingsPopuprv);
+            _skinBallrv.onClick.RemoveListener(ShowHideSkinBallPopuprv);
         }
         
-        private void ShowHideSettingsPopup()
+        private void ShowHideSettingsPopuprv()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
             _settingsPopuprv.SetActive(!_settingsPopuprv.activeSelf);
@@ -54,7 +56,7 @@ namespace UI
             AudioManager.Instance.PlaySFXOneShot(1);
         }
         
-        private void ShowHideSkinBallPopup()
+        private void ShowHideSkinBallPopuprv()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
             _skinBallPopuprv.SetActive(!_skinBallPopuprv.activeSelf);
@@ -62,10 +64,20 @@ namespace UI
             AudioManager.Instance.PlaySFXOneShot(1);
         }
 
-        private void LoadGame()
+        private void LoadGamerv()
         {
             AudioManager.Instance.PlaySFXOneShot(0);
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene(GameScene);
+        }
+        
+        private int CalculateFactorialrv(int number)
+        {
+            int result = 1;
+            for (int i = 2; i <= number; i++)
+            {
+                result *= i;
+            }
+            return result;
         }
     }
 }
