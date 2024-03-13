@@ -12,7 +12,7 @@ namespace Colors
         [SerializeField] 
         private List<Material> _allBallSkins;
 
-        public void SetSkin(int index)
+        public void SetSkinrv(int index)
         {
             SelectedSkinMaterial = _allBallSkins[index];
             PlayerPrefs.SetInt("skinBall",index);

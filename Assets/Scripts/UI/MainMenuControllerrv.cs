@@ -50,23 +50,23 @@ namespace UI
         
         private void ShowHideSettingsPopuprv()
         {
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             _settingsPopuprv.SetActive(!_settingsPopuprv.activeSelf);
             _skinBallPopuprv.SetActive(false);
-            AudioManager.Instance.PlaySFXOneShot(1);
+            AudioManager.Instance.PlaySFXOneShotrv(1);
         }
         
         private void ShowHideSkinBallPopuprv()
         {
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             _skinBallPopuprv.SetActive(!_skinBallPopuprv.activeSelf);
             _settingsPopuprv.SetActive(false);
-            AudioManager.Instance.PlaySFXOneShot(1);
+            AudioManager.Instance.PlaySFXOneShotrv(1);
         }
 
         private void LoadGamerv()
         {
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             SceneManager.LoadScene(GameScene);
         }
         

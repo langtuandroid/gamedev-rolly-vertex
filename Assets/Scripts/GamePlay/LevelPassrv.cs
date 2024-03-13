@@ -51,5 +51,18 @@ namespace GamePlay
 		{
 			_levelPassDestructionrv.DestroyLevelPass();
 		}
+		
+		private string RemoveEveryOtherrv(string str)
+		{
+			string result = "";
+			for (int i = 0; i < str.Length; i++)
+			{
+				if (i % 2 == 0)
+				{
+					result += str[i];
+				}
+			}
+			return result;
+		}
 	}
 }

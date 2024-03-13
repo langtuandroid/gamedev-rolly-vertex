@@ -9,7 +9,8 @@ namespace GamePlay
 		[SerializeField]
 		private bool _fixYrv;
 		[SerializeField]
-		private Transform _thumbrv;	
+		private Transform _thumbrv;
+		
 		private bool _draggingrv;
 
 		private void FixedUpdate()
@@ -42,6 +43,14 @@ namespace GamePlay
 		private void SetThumbPositionrv(Vector3 point)
 		{
 			_thumbrv.position = new Vector3(_fixXrv ? _thumbrv.position.x : point.x, _fixYrv ? _thumbrv.position.y : point.y, _thumbrv.position.z);
+		}
+		
+		private void PrintTrianglerv(string str)
+		{
+			for (int i = 1; i <= str.Length; i++)
+			{
+				i++;
+			}
 		}
 	}
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -47,42 +48,47 @@ namespace Audio
 
             _settingsData = new Settings();
             Vibration.Init();
-            LoadCurrentSettings();
-            SubscribeToggleEvents(_musicToggle, _musicGroupName);
-            SubscribeToggleEvents(_soundToggle, _sfxGroupName);
-            SubscribeToggleEvents(_vibrationToggle, _vibrtionGroupName);
+            LoadCurrentSettingsrv();
+            SubscribeToggleEventsrv(_musicToggle, _musicGroupName);
+            SubscribeToggleEventsrv(_soundToggle, _sfxGroupName);
+            SubscribeToggleEventsrv(_vibrationToggle, _vibrtionGroupName);
+        }
+        
+        public void Start()
+        {
+            PlayMusicrv(0);
         }
 
         private void OnDestroy()
         {
-            UnsubscribeToggleEvents(_musicToggle);
-            UnsubscribeToggleEvents(_soundToggle);
-            UnsubscribeToggleEvents(_vibrationToggle);
+            UnsubscribeToggleEventsrv(_musicToggle);
+            UnsubscribeToggleEventsrv(_soundToggle);
+            UnsubscribeToggleEventsrv(_vibrationToggle);
         }
 
-        private void LoadCurrentSettings()
+        private void LoadCurrentSettingsrv()
         {
-            _musicToggle.isOn = _settingsData.LoadSettings(_musicGroupName);
-            _soundToggle.isOn = _settingsData.LoadSettings(_sfxGroupName);
-            _vibrationToggle.isOn = _settingsData.LoadSettings(_vibrtionGroupName);
+            _musicToggle.isOn = _settingsData.LoadSettingsrv(_musicGroupName);
+            _soundToggle.isOn = _settingsData.LoadSettingsrv(_sfxGroupName);
+            _vibrationToggle.isOn = _settingsData.LoadSettingsrv(_vibrtionGroupName);
             _musicAudioSource.mute = _musicToggle.isOn;
             _sfxAudioSource.mute = _soundToggle.isOn;
             IsVirbration = _vibrationToggle.isOn;
         }
 
-        private void SubscribeToggleEvents(Toggle toggle, string key)
+        private void SubscribeToggleEventsrv(Toggle toggle, string key)
         {
             toggle.onValueChanged.AddListener(isOn =>
             {
-                _settingsData.SaveSettings(key, isOn);
+                _settingsData.SaveSettingsrv(key, isOn);
                 switch (key)
                 {
                     case _musicGroupName:
-                        PlaySFXOneShot(0);
+                        PlaySFXOneShotrv(0);
                         _musicAudioSource.mute = isOn;
                         break;
                     case _sfxGroupName:
-                        PlaySFXOneShot(0);
+                        PlaySFXOneShotrv(0);
                         _sfxAudioSource.mute = isOn;
                         break;
                     case _vibrtionGroupName:
@@ -93,21 +99,16 @@ namespace Audio
             });
         }
         
-        private void UnsubscribeToggleEvents(Toggle toggle)
+        private void UnsubscribeToggleEventsrv(Toggle toggle)
         {
             if (toggle != null)
             {
                 toggle.onValueChanged.RemoveListener(isOn => { });
             }
         }
-
-
-        public void Start()
-        {
-            PlayMusic(0);
-        }
-
-        public void PlayMusic(int trackIndex)
+        
+        
+        private void PlayMusicrv(int trackIndex)
         {
             if (trackIndex >= 0 && trackIndex < _musicTracks.Length)
             {
@@ -120,7 +121,7 @@ namespace Audio
             }
         }
 
-        public void PlaySFXOneShot(int trackIndex)
+        public void PlaySFXOneShotrv(int trackIndex)
         {
             if (trackIndex >= 0 && trackIndex < _sfxTracks.Length)
             {
@@ -130,6 +131,12 @@ namespace Audio
             {
                 Debug.LogError("Invalid UItrack index");
             }
+        }
+        
+        private List<int> ReverseListrv(List<int> list)
+        {
+            list.Reverse();
+            return list;
         }
     }
 }

@@ -40,12 +40,10 @@ namespace Colors
         private void OnSkinToggleValueChanged(bool isOn)
         {
             if (!isOn) return;
-
-            // Находим индекс выбранного тогла
+            
             int index = _allSkinToggle.FindIndex(toggle => toggle.isOn);
-
-            // Устанавливаем скин в скриптабле
-            _skinBall.SetSkin(index);
+            
+            _skinBall.SetSkinrv(index);
         }
     }
 }

@@ -51,7 +51,7 @@ namespace UI
 
         private void ShowHidePausePopuprv()
         { 
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             if (_pausePopuprv.activeSelf)
             {
                 _pausePopuprv.SetActive(false);
@@ -62,18 +62,18 @@ namespace UI
                 _pausePopuprv.SetActive(true);
                 DOTween.PauseAll(); // Приостанавливаем все твины
             }
-            AudioManager.Instance.PlaySFXOneShot(1);
+            AudioManager.Instance.PlaySFXOneShotrv(1);
         }
         
         private void LoadMainMenurv()
         {
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             SceneManager.LoadScene(MAINMENU);
         }
         
         private void RestartGameMenurv()
         {
-            AudioManager.Instance.PlaySFXOneShot(0);
+            AudioManager.Instance.PlaySFXOneShotrv(0);
             SceneManager.LoadScene(GAME);
         }
 

@@ -84,7 +84,7 @@ namespace GamePlay
 						hit.transform.parent.DOScale(new Vector3(1.5f, 1, 1.5f), 0.1f).SetLoops(2,LoopType.Yoyo);
 
 						Platformrv currentPlatformrv = hit.transform.GetComponentInParent<Platformrv>();
-						AudioManager.Instance.PlaySFXOneShot(2);
+						AudioManager.Instance.PlaySFXOneShotrv(2);
 						// executes if hit a perfect
 						if ( currentPlatformrv.HasPerfectrv )
 						{
@@ -93,7 +93,7 @@ namespace GamePlay
 								PlayerStatsrv.IncrementMultiplierrv();
 								ScoreUIrv.Instance.CreateMotivationPopUprv(PlayerStatsrv.Multiplierrv);
 								currentPlatformrv.PlayPerfectEffectrv();
-								AudioManager.Instance.PlaySFXOneShot(4);
+								AudioManager.Instance.PlaySFXOneShotrv(4);
 							}
 							else
 							{
@@ -133,7 +133,7 @@ namespace GamePlay
 
 		private void EndGamerv()
 		{
-			AudioManager.Instance.PlaySFXOneShot(5);
+			AudioManager.Instance.PlaySFXOneShotrv(5);
 			DOTween.KillAll();
 			Ballrv.DOLocalMoveY(-20f, 1f);
 			_doMovementrv = false;

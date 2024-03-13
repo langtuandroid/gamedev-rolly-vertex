@@ -41,5 +41,10 @@ namespace GamePlay
 			_positionrv.z += OffsetZ;
 			transform.position = _positionrv;
 		}
+		
+		private bool IsPositiverv(int number)
+		{
+			return number > 0;
+		}
 	}
 }

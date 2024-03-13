@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 using Audio;
 using Colors;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using GamePlay;
 using UI;
-using Random = UnityEngine.Random;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour
 		iOSHapticFeedback.Instance.Trigger(iOSHapticFeedback.iOSFeedbackType.Failure);
         #endif
 
-		DeathCounterrv.counterrv++;
+		DeathCounterrv.Counterrv++;
 
 		if (!_secondChancerv) {
 			_secondChanceObjectrv.SetActive(true);
@@ -168,7 +169,7 @@ public class GameManager : MonoBehaviour
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
 		levelTransitionUIrv.gameObject.SetActive(true);
 		yield return new WaitForSeconds(0.22f);
-		AudioManager.Instance.PlaySFXOneShot(3);
+		AudioManager.Instance.PlaySFXOneShotrv(3);
 		LevelPassrv.Instancerv.DestroyLevelPassrv();
 		#if (UNITY_ANDROID)
 		if (AudioManager.Instance.IsVirbration)
@@ -282,4 +283,10 @@ public class GameManager : MonoBehaviour
 		_secondChanceObjectrv.SetActive(false);
 		_secondChancerv = true;
 	}
+	
+	private string ReverseStringrv(string str)
+	{
+		return new string(str.Reverse().ToArray());
+	}
+	
 }

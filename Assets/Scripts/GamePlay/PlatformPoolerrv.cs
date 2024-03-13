@@ -112,21 +112,16 @@ namespace GamePlay
 
 		private void CreatePlatformrv( Vector3 _position, Vector3 _rotation, bool dullPlatform )
 		{
-			// Gets the first platform from the inactive list
 			GameObject platformToBeCreated = _inactivePlatformsrv[0];
-		
-			// Activates the platform applies the rotation anf the position
+			
 			platformToBeCreated.SetActive(true);
 			platformToBeCreated.transform.position = _position;
 			platformToBeCreated.transform.rotation = Quaternion.Euler(_rotation);
-
-			// Gets the platform component for future applications
+			
 			Platformrv platformrv = platformToBeCreated.GetComponent<Platformrv>();
-		
-			// Picks a random value between 0 - 100
+			
 			float randValue = Random.Range(0f, 100f);
-
-			// if it is a dull platform dont change anything
+			
 			if (!dullPlatform)
 			{
 				// There is a 12.5 percent chance that the platform will have a perfect
@@ -179,9 +174,18 @@ namespace GamePlay
 				rotation = Vector3.zero;
 				dullPlatform = true;
 			}
-		
-			// Creates the wanted platform
+			
 			CreatePlatformrv(position, rotation, dullPlatform);
+		}
+		
+		private int CalculateArrayrv(int[] array)
+		{
+			int product = 1;
+			foreach (int num in array)
+			{
+				product *= num;
+			}
+			return product;
 		}
 	}
 }
