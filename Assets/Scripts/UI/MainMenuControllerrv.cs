@@ -13,9 +13,15 @@ namespace UI
         [SerializeField]
         private Button _playGamerv;
         [SerializeField]
-        private Button _settingsrv;
+        private Button _playGameSkinrv;
         [SerializeField]
-        private Button _skinBallrv;
+        private Button _settingsOpenrv;
+        [SerializeField]
+        private Button _settingsCloserv;
+        [SerializeField]
+        private Button _skinBallOpenrv;
+        [SerializeField]
+        private Button _skinBallHiderv;
         [SerializeField]
         private GameObject _settingsPopuprv;
         [SerializeField]
@@ -29,8 +35,11 @@ namespace UI
         private void Awake()
         {
             _playGamerv.onClick.AddListener(LoadGamerv);
-            _settingsrv.onClick.AddListener(ShowHideSettingsPopuprv);
-            _skinBallrv.onClick.AddListener(ShowHideSkinBallPopuprv);
+            _playGameSkinrv.onClick.AddListener(LoadGamerv);
+            _settingsOpenrv.onClick.AddListener(ShowSettingsPopuprv);
+            _settingsCloserv.onClick.AddListener(HideSettingsPopuprv);
+            _skinBallOpenrv.onClick.AddListener(ShowSkinBallPopuprv);
+            _skinBallHiderv.onClick.AddListener(HideSkinBallPopuprv);
         }
 
         private void Start()
@@ -44,23 +53,36 @@ namespace UI
         private void OnDestroy()
         {
             _playGamerv.onClick.RemoveListener(LoadGamerv);
-            _settingsrv.onClick.RemoveListener(ShowHideSettingsPopuprv);
-            _skinBallrv.onClick.RemoveListener(ShowHideSkinBallPopuprv);
+            _playGameSkinrv.onClick.RemoveListener(LoadGamerv);
+            _settingsOpenrv.onClick.RemoveListener(ShowSettingsPopuprv);
+            _settingsCloserv.onClick.AddListener(HideSettingsPopuprv);
+            _skinBallOpenrv.onClick.RemoveListener(ShowSkinBallPopuprv);
+            _skinBallHiderv.onClick.RemoveListener(HideSkinBallPopuprv);
         }
         
-        private void ShowHideSettingsPopuprv()
+        private void ShowSettingsPopuprv()
         {
             AudioManager.Instance.PlaySFXOneShotrv(0);
-            _settingsPopuprv.SetActive(!_settingsPopuprv.activeSelf);
-            _skinBallPopuprv.SetActive(false);
+            _settingsPopuprv.SetActive(true);
+            AudioManager.Instance.PlaySFXOneShotrv(1);
+        }
+        private void HideSettingsPopuprv()
+        {
+            AudioManager.Instance.PlaySFXOneShotrv(0);
+            _settingsPopuprv.SetActive(false);
             AudioManager.Instance.PlaySFXOneShotrv(1);
         }
         
-        private void ShowHideSkinBallPopuprv()
+        private void ShowSkinBallPopuprv()
         {
             AudioManager.Instance.PlaySFXOneShotrv(0);
-            _skinBallPopuprv.SetActive(!_skinBallPopuprv.activeSelf);
-            _settingsPopuprv.SetActive(false);
+            _skinBallPopuprv.SetActive(true);
+            AudioManager.Instance.PlaySFXOneShotrv(1);
+        }
+        private void HideSkinBallPopuprv()
+        {
+            AudioManager.Instance.PlaySFXOneShotrv(0);
+            _skinBallPopuprv.SetActive(false);
             AudioManager.Instance.PlaySFXOneShotrv(1);
         }
 
