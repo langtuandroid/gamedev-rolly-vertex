@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,21 +12,31 @@ namespace Colors
         [SerializeField]
         private List<Toggle> _allSkinToggle;
 
+        private int _activeSkin;
+
         private void Awake()
         {
             if (!PlayerPrefs.HasKey("skinBall"))
             {
                 PlayerPrefs.SetInt("skinBall",0);
             }
-            int activeSkin = PlayerPrefs.GetInt("skinBall");
+            _activeSkin = PlayerPrefs.GetInt("skinBall");
 
-            _allSkinToggle[activeSkin].isOn = true;
+            _allSkinToggle[_activeSkin].isOn = true;
 
             foreach (Toggle toggle in _allSkinToggle)
             {
                 toggle.onValueChanged.AddListener(OnSkinToggleValueChanged);
             }
         }
+
+        private void OnEnable()
+        {
+            _activeSkin = PlayerPrefs.GetInt("skinBall");
+            Debug.Log("_activeSkin=" +_activeSkin);
+            _allSkinToggle[_activeSkin].isOn = true;
+        }
+        
 
         private void OnDestroy()
         {
@@ -42,7 +51,6 @@ namespace Colors
             if (!isOn) return;
             
             int index = _allSkinToggle.FindIndex(toggle => toggle.isOn);
-            
             _skinBall.SetSkinrv(index);
         }
     }

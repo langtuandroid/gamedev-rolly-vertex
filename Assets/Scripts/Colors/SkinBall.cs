@@ -17,7 +17,12 @@ namespace Colors
             SelectedSkinMaterial = _allBallSkins[index];
             PlayerPrefs.SetInt("skinBall",index);
         }
-
-        public Material LoadSelectedSkin() => SelectedSkinMaterial;
+        
+        public Material LoadSelectedSkin()
+        {
+            int index =  PlayerPrefs.GetInt("skinBall");
+            SelectedSkinMaterial = _allBallSkins[index];
+            return SelectedSkinMaterial;
+        }
     }
 }

@@ -31,9 +31,22 @@ namespace UI
         private TextMeshProUGUI _currentLevelrv;
         [SerializeField]
         private TextMeshProUGUI _bestScorerv;
+        
+        [SerializeField]
+        private Image _backGround;
+        [SerializeField]
+        private Image _backGroundSettings;
+        [SerializeField]
+        private Image _backGroundSkin;
+        [SerializeField]
+        private Sprite _bgSmartphone;
+        [SerializeField]
+        private Sprite _bgTablet;
+        
 
         private void Awake()
         {
+            CheckDeviceInches();
             _playGamerv.onClick.AddListener(LoadGamerv);
             _playGameSkinrv.onClick.AddListener(LoadGamerv);
             _settingsOpenrv.onClick.AddListener(ShowSettingsPopuprv);
@@ -58,6 +71,24 @@ namespace UI
             _settingsCloserv.onClick.AddListener(HideSettingsPopuprv);
             _skinBallOpenrv.onClick.RemoveListener(ShowSkinBallPopuprv);
             _skinBallHiderv.onClick.RemoveListener(HideSkinBallPopuprv);
+        }
+        
+        private void CheckDeviceInches()
+        {
+            float screenSizeInches =
+                Mathf.Sqrt(Mathf.Pow(Screen.width / Screen.dpi, 2) + Mathf.Pow(Screen.height / Screen.dpi, 2));
+            if (screenSizeInches >= 7.0f) 
+            {
+                _backGround.sprite = _bgTablet;
+                _backGroundSettings.sprite = _bgTablet;
+                _backGroundSkin.sprite = _bgTablet;
+            }
+            else
+            {
+                _backGround.sprite = _bgSmartphone;
+                _backGroundSettings.sprite = _bgSmartphone;
+                _backGroundSkin.sprite = _bgSmartphone;
+            }
         }
         
         private void ShowSettingsPopuprv()
