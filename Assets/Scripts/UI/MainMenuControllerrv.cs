@@ -41,6 +41,8 @@ namespace UI
         [SerializeField]
         private Sprite _bgSmartphone;
         [SerializeField]
+        private Sprite _bgMidleTablet;
+        [SerializeField]
         private Sprite _bgTablet;
         
 
@@ -75,20 +77,22 @@ namespace UI
         
         private void CheckDeviceInches()
         {
-            float screenSizeInches =
-                Mathf.Sqrt(Mathf.Pow(Screen.width / Screen.dpi, 2) + Mathf.Pow(Screen.height / Screen.dpi, 2));
-            if (screenSizeInches >= 7.0f) 
+            float screenSizeInches = Mathf.Sqrt(Mathf.Pow(Screen.width / Screen.dpi, 2) + Mathf.Pow(Screen.height / Screen.dpi, 2));
+            float aspectRatio = (float)Screen.width / Screen.height; // Вычисляем соотношение сторон
+            Sprite backgroundSprite;
+
+            if (screenSizeInches >= 7.0f)
             {
-                _backGround.sprite = _bgTablet;
-                _backGroundSettings.sprite = _bgTablet;
-                _backGroundSkin.sprite = _bgTablet;
+                backgroundSprite = Mathf.Approximately(aspectRatio, 3f / 5f) ? _bgMidleTablet : _bgTablet;
             }
             else
             {
-                _backGround.sprite = _bgSmartphone;
-                _backGroundSettings.sprite = _bgSmartphone;
-                _backGroundSkin.sprite = _bgSmartphone;
+                backgroundSprite = _bgSmartphone;
             }
+
+            _backGround.sprite = backgroundSprite;
+            _backGroundSettings.sprite = backgroundSprite;
+            _backGroundSkin.sprite = backgroundSprite;
         }
         
         private void ShowSettingsPopuprv()

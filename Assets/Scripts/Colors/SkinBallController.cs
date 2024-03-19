@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,13 +31,12 @@ namespace Colors
             }
         }
 
-        private void OnEnable()
+        private void Start()
         {
             _activeSkin = PlayerPrefs.GetInt("skinBall");
-            Debug.Log("_activeSkin=" +_activeSkin);
             _allSkinToggle[_activeSkin].isOn = true;
         }
-        
+
 
         private void OnDestroy()
         {

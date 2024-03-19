@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c19a018d1b434c869e6bf0a42bf1c08, type: 3}
   m_Name: Skins Ball
   m_EditorClassIdentifier: 
-  SelectedSkinMaterial: {fileID: 2100000, guid: 60e9a7cfe7d8f433a92a577709f584d6,
+  SelectedSkinMaterial: {fileID: 2100000, guid: 666faf77dd09f4d0a9b149800346f522,
     type: 2}
   _allBallSkins:
   - {fileID: 2100000, guid: 6b23f5dc2e5ea4e299726b390c6722ba, type: 2}
@@ -20,8 +20,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 51c252c3c10ff4feeba631607f5a672e, type: 2}
   - {fileID: 2100000, guid: 60e9a7cfe7d8f433a92a577709f584d6, type: 2}
   - {fileID: 2100000, guid: c5be5e2d68c2e4b789b4f192b04b8887, type: 2}
-  - {fileID: 2100000, guid: 666faf77dd09f4d0a9b149800346f522, type: 2}
   - {fileID: 2100000, guid: 17397aab2867b43e6b173e441927e753, type: 2}
+  - {fileID: 2100000, guid: 666faf77dd09f4d0a9b149800346f522, type: 2}
   - {fileID: 2100000, guid: b1ba6ea4d49f54cf788d3cca1133b5a6, type: 2}
   - {fileID: 2100000, guid: 2f540a13006a2423a89bad25bcfbde12, type: 2}
   - {fileID: 2100000, guid: 10a6c8748c96b422892f9d6eec62b1b0, type: 2}
