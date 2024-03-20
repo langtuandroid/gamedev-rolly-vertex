@@ -161,7 +161,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 600, y: 280}
+  m_SizeDelta: {x: 580, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1509276
 MonoBehaviour:
@@ -2721,8 +2721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 800}
-  m_SizeDelta: {x: 900, y: 200}
+  m_AnchoredPosition: {x: 0, y: 900}
+  m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &598567998
 MonoBehaviour:
@@ -2744,7 +2744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2d7a3ebdf85cd478eb341ffc74cf49c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf0487d559376438a9993bcdfedbcd22, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12718,8 +12718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31dbce164606744f28415c785392e609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlForPrivacyPolicyrv: https://www.google.com
-  _urlForTermsOfUserv: https://www.google.com
+  _urlForPrivacyPolicyrv: https://docs.google.com/document/d/1GPiX8fyr17U3SZJEBQaGNP6MNynDLdvS/edit?usp=sharing&ouid=101204207249069986994&rtpof=true&sd=true
+  _urlForTermsOfUserv: https://docs.google.com/document/d/1T8QmVy328oSbYzC2zM4KnF4_Geo9T5oh/edit?usp=sharing&ouid=101204207249069986994&rtpof=true&sd=true
   _privacyButtonrv: {fileID: 1817903151}
   _termsButtonrv: {fileID: 1772758047}
 --- !u!1 &2114572844

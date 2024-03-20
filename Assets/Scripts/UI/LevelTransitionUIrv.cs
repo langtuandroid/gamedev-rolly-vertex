@@ -12,7 +12,7 @@ namespace UI
 
 		private void OnEnable()
 		{
-			_levelTransitionTextrv.text = "Vortex " + PlayerStatsrv.Levelrv;
+			_levelTransitionTextrv.text = "Wild Bounce " + PlayerStatsrv.Levelrv;
 		}
 		
 		private int CountOccurrencesrv(string str, char target)
