@@ -3682,7 +3682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wild Bounce '
+  m_text: Jump Force
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94ea26c1913434e6ebf6bd3ec1a66512, type: 2}
   m_sharedMaterial: {fileID: -1667788092928317000, guid: 94ea26c1913434e6ebf6bd3ec1a66512,

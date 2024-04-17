@@ -2744,7 +2744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf0487d559376438a9993bcdfedbcd22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 945c2abeb174f49039878a49713d0a76, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12718,8 +12718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31dbce164606744f28415c785392e609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlForPrivacyPolicyrv: https://docs.google.com/document/d/1GPiX8fyr17U3SZJEBQaGNP6MNynDLdvS/edit?usp=sharing&ouid=101204207249069986994&rtpof=true&sd=true
-  _urlForTermsOfUserv: https://docs.google.com/document/d/1T8QmVy328oSbYzC2zM4KnF4_Geo9T5oh/edit?usp=sharing&ouid=101204207249069986994&rtpof=true&sd=true
+  _urlForPrivacyPolicyrv: https://docs.google.com/document/d/1dMoupBPiGWSh1hL2Nreao6shufPPOOen/edit?usp=sharing&ouid=108593829726135506999&rtpof=true&sd=true
+  _urlForTermsOfUserv: https://docs.google.com/document/d/1j4upAnolmwo3ytft65sMBlBhV_oD4FG_/edit?usp=sharing&ouid=108593829726135506999&rtpof=true&sd=tru
   _privacyButtonrv: {fileID: 1817903151}
   _termsButtonrv: {fileID: 1772758047}
 --- !u!1 &2114572844
