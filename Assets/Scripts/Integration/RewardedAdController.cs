@@ -7,6 +7,7 @@ namespace Integration
     public class RewardedAdController
     {
         public event Action GetRewarded;
+        public event Action OnVideoClosed;
         
         private RewardedAd _rewardedAd;
         private string _rewardedId;
@@ -126,6 +127,7 @@ namespace Integration
             {
                 LoadAd();
                 GetRewarded?.Invoke();
+                OnVideoClosed?.Invoke();
                 Debug.Log("Rewarded ad full screen content closed.");
             };
             // Raised when the ad failed to open full screen content.
@@ -133,6 +135,7 @@ namespace Integration
             {
                 Debug.LogError("Rewarded ad failed to open full screen content with error : "
                                + error);
+                OnVideoClosed?.Invoke();
             };
         }
     }
