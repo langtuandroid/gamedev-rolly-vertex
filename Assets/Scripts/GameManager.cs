@@ -7,7 +7,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using GamePlay;
+using Integration;
 using UI;
+using Zenject;
 
 
 public class GameManager : MonoBehaviour
@@ -55,6 +57,12 @@ public class GameManager : MonoBehaviour
 	public List<Color> colors;
 	private Color previousColor;
 	public Color newColor;
+	
+	private const string IntegrationsCounter = "IntegrationsCounter";
+	private int loadLevelCount = 0; 
+	
+	private IAPService _iapService;
+	private AdMobController _adMobController;
 
 	public int LevelMilestonerv
 	{
@@ -62,7 +70,13 @@ public class GameManager : MonoBehaviour
 		set => _levelMilestonerv = value;
 	}
 
-
+	[Inject]
+	private void Construct(IAPService iapService, AdMobController adMobController)
+	{
+		_iapService = iapService;
+		_adMobController = adMobController;
+	}
+	
 	private void Awake()
 	{
 		Instance = this;
@@ -78,7 +92,34 @@ public class GameManager : MonoBehaviour
         _tempPlatformrvrv.PlatformMaterialrv.SetFloat(_thresholdId, _thresholdrv);
         LoadSkinBall();
 		ColorSelectionrv(PlayerPrefs.GetInt("Color", 0));
-    }
+		
+		ShowIntegration();
+	}
+	
+	private void ShowIntegration()
+	{
+		loadLevelCount = PlayerPrefs.GetInt(IntegrationsCounter, 0);
+		loadLevelCount++;
+		Debug.Log("loadLevelCount = " + loadLevelCount);
+		if (loadLevelCount % 2 == 0)
+		{
+			Debug.Log("% 2");
+			_adMobController.ShowInterstitialAd();
+			_adMobController.ShowBanner(true);
+		}
+		else if (loadLevelCount % 3 == 0)
+		{
+			Debug.Log("% 3");
+			_iapService.ShowSubscriptionPanel();
+		}
+
+		if (loadLevelCount >= 3)
+		{
+			loadLevelCount = 0;
+		}
+		PlayerPrefs.SetInt(IntegrationsCounter, loadLevelCount);
+		PlayerPrefs.Save(); 
+	}
 
 	private void LoadSkinBall()
 	{
