@@ -100,16 +100,14 @@ public class GameManager : MonoBehaviour
 	{
 		loadLevelCount = PlayerPrefs.GetInt(IntegrationsCounter, 0);
 		loadLevelCount++;
-		Debug.Log("loadLevelCount = " + loadLevelCount);
+		_adMobController.ShowBanner(true);
+		
 		if (loadLevelCount % 2 == 0)
 		{
-			Debug.Log("% 2");
 			_adMobController.ShowInterstitialAd();
-			_adMobController.ShowBanner(true);
 		}
 		else if (loadLevelCount % 3 == 0)
 		{
-			Debug.Log("% 3");
 			_iapService.ShowSubscriptionPanel();
 		}
 
@@ -209,6 +207,8 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0.25f;
 		Time.fixedDeltaTime = 0.02f * Time.timeScale;
 		levelTransitionUIrv.gameObject.SetActive(true);
+		PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 20);
+		PlayerPrefs.Save();
 		yield return new WaitForSeconds(0.22f);
 		AudioManager.Instance.PlaySFXOneShotrv(3);
 		LevelPassrv.Instancerv.DestroyLevelPassrv();

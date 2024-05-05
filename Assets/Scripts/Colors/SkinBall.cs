@@ -10,19 +10,20 @@ namespace Colors
         private Material SelectedSkinMaterial;
         
         [SerializeField] 
-        private List<Material> _allBallSkins;
+        private List<PurchasePrduct> _allBallSkins;
 
         public void SetSkinrv(int index)
         {
-            SelectedSkinMaterial = _allBallSkins[index];
+            SelectedSkinMaterial = _allBallSkins[index]._material;
             PlayerPrefs.SetInt("skinBall",index);
         }
         
         public Material LoadSelectedSkin()
         {
             int index =  PlayerPrefs.GetInt("skinBall");
-            SelectedSkinMaterial = _allBallSkins[index];
+            SelectedSkinMaterial = _allBallSkins[index]._material;
             return SelectedSkinMaterial;
         }
     }
+    
 }

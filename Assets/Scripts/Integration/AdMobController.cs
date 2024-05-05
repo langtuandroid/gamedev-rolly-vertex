@@ -12,16 +12,15 @@ namespace Integration
 
 	public class AdMobController : MonoBehaviour
 	{
-		private bool _noAds;
 		public string noAdsKey = "NoAds";
-
 		[SerializeField] private AdMobSettings _settings;
-		[SerializeField] private bool IsProdaction;
 		
+		private bool _isPurchased;
 		private BannerViewController _bannerViewController;
 		private InterstitialAdController _interstitialAdController;
 		private RewardedAdController _rewardedAdController;
 
+		public bool IsPurchased => _isPurchased;
 
 		[Inject]
 		private void Construct(
@@ -43,17 +42,17 @@ namespace Integration
 
 		private void Start()
 		{
-			_bannerViewController.BannerId = IsProdaction ? _settings.BannerID : _settings.BannerTestID;
-			_interstitialAdController.InterstitialId = IsProdaction ? _settings.InterstitialID : _settings.InterstitialTestID;
-			_rewardedAdController.RewardedId = IsProdaction ? _settings.RewardedID : _settings.RewardedTestID;
+			_bannerViewController.BannerId = _settings.BannerID;
+			_interstitialAdController.InterstitialId = _settings.InterstitialID;
+			_rewardedAdController.RewardedId = _settings.RewardedID;
 			LoadAllAds();
 		}
 
 		private void LoadAllAds()
 		{
-			_noAds = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
-			Debug.Log("_noAds=" +_noAds);
-			if (!_noAds)
+			_isPurchased = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
+			Debug.Log("_noAds=" +IsPurchased);
+			if (!IsPurchased)
 			{
 				RequestBanner();
 				_interstitialAdController.LoadAd();
@@ -65,7 +64,8 @@ namespace Integration
 		public void RemoveAds()
 		{
 			PlayerPrefs.SetInt(noAdsKey, 1);
-			ShowBanner(false);
+			PlayerPrefs.Save();
+			_bannerViewController.HideAd();
 		}
 		
 // Banner	
@@ -78,8 +78,8 @@ namespace Integration
 
 		public void ShowBanner(bool show)
 		{
-			_noAds = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
-			if (!_noAds)
+			_isPurchased = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
+			if (!IsPurchased)
 			{
 				if (show)
 				{
@@ -95,8 +95,8 @@ namespace Integration
 // Interstitial		
 		public void ShowInterstitialAd()
 		{
-			_noAds = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
-			if (!_noAds)
+			_isPurchased = PlayerPrefs.GetInt(noAdsKey, 0) == 1;
+			if (!IsPurchased)
 			{
 				_interstitialAdController.ShowAd();
 			}
