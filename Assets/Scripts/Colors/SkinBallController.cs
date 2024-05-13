@@ -105,8 +105,8 @@ namespace Colors
         {
             _selectedSkin = index;
             var product = _allSkinToggle[index].Product;
-            var coins = PlayerPrefs.GetInt("Coins", 10000);
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins", 10000));
+            var coins = PlayerPrefs.GetInt("Coins", 0);
+            //PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins", 0));
             _coinsHolder.UpdateCoinsView();
             var diamonds = PlayerPrefs.GetInt("Diamonds", 0);
             _diamondsHolder.UpdateDiamondsView();

@@ -220,11 +220,11 @@ namespace Integration
                 }
                 else if (subscriptionID == _subscriptionYearProductID)
                 {
-                    _priceYear.text = _priceMonth.text.Replace("12.99$", subscriptionPrice);
+                    _priceYear.text = _priceYear.text.Replace("12.99$", subscriptionPrice);
                 }
                 else if (subscriptionID == _subscriptionForeverProductID)
                 {
-                    _priceForever.text = _priceMonth.text.Replace("19.99$", subscriptionPrice);
+                    _priceForever.text = _priceForever.text.Replace("19.99$", subscriptionPrice);
                 }
             }
         }
